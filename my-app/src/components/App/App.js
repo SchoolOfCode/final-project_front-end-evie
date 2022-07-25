@@ -9,11 +9,6 @@ mapboxgl.accessToken=process.env.Key
 
 
 function App() {
-
-
-
-
-
   return (
     <div className="App">
         <Maps/>
