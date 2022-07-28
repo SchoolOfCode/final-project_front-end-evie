@@ -302,8 +302,10 @@
 .mapbox-directions-inputs .directions-pin-right *.active {
   display: block;
 }
+
+/*Traffic/driving/walking/cycling*/
 .mapbox-directions-profile {
-  background: #fff;
+  background: #E8F6FF;
   margin: 7px 0 0;
   padding: 2px;
   border-radius: 15px;
@@ -316,14 +318,14 @@
   border-radius: 16px;
   padding: 3px 5px;
   font-size: 12px;
-  color: rgba(0, 0, 0, .5);
+  color: #0092C5;
   line-height: 20px;
   text-align: center;
   width: 25%;
   float: left;
 }
 .mapbox-directions-profile label:hover {
-  color: rgba(0, 0, 0, .75);
+  color: rgba(0, 0, 0);
 }
 .mapbox-directions-profile input[type=radio] {
   display: none;
