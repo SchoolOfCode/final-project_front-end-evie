@@ -311,6 +311,7 @@
   border-radius: 15px;
   vertical-align: middle;
 }
+/*traffic/driving/walking.cycling*/
 .mapbox-directions-profile label {
   cursor: pointer;
   vertical-align: top;
@@ -330,10 +331,12 @@
 .mapbox-directions-profile input[type=radio] {
   display: none;
 }
+
+/*highlight traffic/driving/walking/cycling mode*/
 .mapbox-directions-profile input[type=radio]:checked+label:hover,
 .mapbox-directions-profile input[type=radio]:checked+label {
   background: #eee;
-  color: rgba(0, 0, 0, .75);
+  color: #D57300;
 }
 /* Routes */
 .mapbox-directions-routes ul {
