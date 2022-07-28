@@ -142,7 +142,7 @@
 }
 .mapboxgl-ctrl-geocoder ul>li.active>a,
 .mapboxgl-ctrl-geocoder ul>li>a:hover {
-  background-color: #eee;
+  background-color: #0092C5;
   text-decoration: none;
   cursor: pointer;
 }
