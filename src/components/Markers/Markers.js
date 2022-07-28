@@ -42,7 +42,7 @@ class Mapp extends React.Component{
 	componentDidMount(){
 		const map = new mapboxgl.Map({
 			container: this.mapContainer,
-			style: 'mapbox://styles/shiy/ckjg4xi1r158y19maqdzjkqjx', 
+			style: 'mapbox://styles/mapbox/streets-v11', 
 			center: [this.state.lng, this.state.lat],
 			zoom: this.state.zoom
 		})
