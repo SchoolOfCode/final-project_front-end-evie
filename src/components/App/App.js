@@ -36,6 +36,7 @@ map.current.addControl(
 
       data.forEach((location) => {
         console.log(location)
+        // eslint-disable-next-line
         var marker = new mapboxgl.Marker()
                 .setLngLat(location.coordinates)
                 .setPopup(new mapboxgl.Popup({ offset: 30 })
