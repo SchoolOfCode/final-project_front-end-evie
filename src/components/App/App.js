@@ -3,13 +3,13 @@ import './App.css';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
-//import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
+import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
+import data from '../../libs/data';
 
 
 
+mapboxgl.accessToken=process.env.REACT_APP_API_KEY;
 
-
-mapboxgl.accessToken='pk.eyJ1IjoibmVlbW9kYWIiLCJhIjoiY2w2MGpqNDVlMWtlMzNscnRzamk4MmJ6diJ9.I_R2v2UXU5W1-25uPNwePQ';
 
 
 function App() {
@@ -23,7 +23,7 @@ useEffect(() => {
 if (map.current) return; // initialize map only once
 map.current = new mapboxgl.Map({
 container: mapContainer.current,
-style: 'mapbox://styles/mapbox/streets-v11',
+style: 'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84',
 center: [lng, lat],
 zoom: zoom
 });
@@ -33,8 +33,19 @@ map.current.addControl(
         }),
         'top-right'
       );
-});
 
+      data.forEach((location) => {
+        console.log(location)
+        // eslint-disable-next-line
+        var marker = new mapboxgl.Marker()
+                .setLngLat(location.coordinates)
+                .setPopup(new mapboxgl.Popup({ offset: 30 })
+                .setHTML('<h4>' + location.name + '</h4>' + location.location + '<h4>' + location.city + '<h4>' + location.status))
+                .addTo(map.current);
+  
+      })
+});
+		
 
 //Store new coordinates that you get when a user interacts with the map
 useEffect(() => {
@@ -51,7 +62,7 @@ setZoom(map.current.getZoom().toFixed(2));
 
   return (
     <>
-   <div>
+  <div>
     <div className="sidebar">
       Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
     </div>
