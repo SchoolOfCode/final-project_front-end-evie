@@ -3,7 +3,7 @@ import './App.css';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
-import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
+//import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
 import data from '../../libs/data';
 
 
@@ -19,6 +19,7 @@ function App() {
   const [lat, setLat] = useState(52.489471);
   const [zoom, setZoom] = useState(9);
 
+  //'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84'
 useEffect(() => {
 if (map.current) return; // initialize map only once
 map.current = new mapboxgl.Map({
