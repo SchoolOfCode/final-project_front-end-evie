@@ -59,14 +59,16 @@
   background-color: #e8f6ff;
   height: 40px;
   margin: 0;
-  color: rgba(0, 0, 0, 0.5);
+
+  color: #0092C5;
   padding: 10px 40px 10px 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
-.mapbox-directions-origin input[type="text"] {
-  box-shadow: 0 1px 0 0 #ddd;
+
+.mapbox-directions-origin input[type='text'] {
+  box-shadow: 0 1px 0 0 #0092C5;
   position: relative;
   z-index: 1;
 }
@@ -84,7 +86,7 @@
 .mapboxgl-ctrl-geocoder button {
   padding: 0;
   margin: 0;
-  background-color: rgb(101, 22, 22);
+  background-color: rgb(241, 10, 10);
   border: none;
   cursor: pointer;
 }
@@ -140,9 +142,10 @@
 .mapboxgl-ctrl-geocoder ul > li:last-child > a {
   border-bottom: none;
 }
-.mapboxgl-ctrl-geocoder ul > li.active > a,
-.mapboxgl-ctrl-geocoder ul > li > a:hover {
-  background-color: #eee;
+
+.mapboxgl-ctrl-geocoder ul>li.active>a,
+.mapboxgl-ctrl-geocoder ul>li>a:hover {
+  background-color: #0092C5;
   text-decoration: none;
   cursor: pointer;
 }
@@ -217,8 +220,10 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+/*outline and colour of the destination box*/
 .mapbox-directions-component-keyline {
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 15px #0092C5;
   border-radius: 3px;
 }
 .directions-control {
@@ -229,9 +234,10 @@
   width: 100%;
   z-index: 1;
 }
+/*background colour of step by step directions*/
 .directions-control.directions-control-directions {
-  background: rgba(0, 0, 0, 0.75);
-  margin: 7px 0 0;
+  background: #E8F6FF;
+  margin: 18px 0 0;
   color: #fff;
   top: 0;
   right: 0;
@@ -248,11 +254,12 @@
 .mapbox-directions-destination {
   position: relative;
 }
+/*background colour for the letter B*/
 .mapbox-form-label {
   position: absolute;
   top: 0;
   left: 0;
-  background: #8a8acb;
+  background: #e8f6ff;
   color: #fff;
   padding: 0;
   width: 40px;
@@ -266,24 +273,27 @@
   width: 40px;
   height: 40px;
 }
+/*background colour for the letter A. Box shadow line between A and*/
 .mapbox-directions-origin .mapbox-form-label {
-  background-color: #3bb2d0;
+  background-color: #e8f6ff;
   border-radius: 3px 0 0 0;
-  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 0 0 #0092C5;
   z-index: 1;
 }
 .directions-reverse {
   position: absolute;
   z-index: 10;
-  background: white;
+  background: rgb #fff;
   left: 40px;
   top: 30px;
   cursor: pointer;
 }
+
+/* arrow between start and finish destination*/
 .mapbox-directions-inputs button {
   padding: 0;
   margin: 0;
-  background-color: #fff;
+  background-color: #E8f6ff;
   border: none;
   cursor: pointer;
 }
@@ -298,13 +308,16 @@
 .mapbox-directions-inputs .directions-pin-right *.active {
   display: block;
 }
+
+/*Traffic/driving/walking/cycling*/
 .mapbox-directions-profile {
-  background: #fff;
-  margin: 7px 0 0;
+  background: #E8F6FF;
+  margin: 31px 0 0;
   padding: 2px;
   border-radius: 15px;
   vertical-align: middle;
 }
+/*traffic/driving/walking.cycling*/
 .mapbox-directions-profile label {
   cursor: pointer;
   vertical-align: top;
@@ -312,30 +325,35 @@
   border-radius: 16px;
   padding: 3px 5px;
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.5);
+  color: #0092C5;
   line-height: 20px;
   text-align: center;
   width: 25%;
   float: left;
 }
 .mapbox-directions-profile label:hover {
-  color: rgba(0, 0, 0, 0.75);
+
+  color: rgba(0, 0, 0);
 }
 .mapbox-directions-profile input[type="radio"] {
   display: none;
 }
-.mapbox-directions-profile input[type="radio"]:checked + label:hover,
-.mapbox-directions-profile input[type="radio"]:checked + label {
+
+/*highlight traffic/driving/walking/cycling mode*/
+.mapbox-directions-profile input[type=radio]:checked+label:hover,
+.mapbox-directions-profile input[type=radio]:checked+label {
   background: #eee;
-  color: rgba(0, 0, 0, 0.75);
+  color: #D57300;
 }
-/* Routes */
+/* Routes - unsure what this style */
 .mapbox-directions-routes ul {
   list-style: none;
   margin: 0;
   padding: 10px 10px 0 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 }
+
+/* Routes - unsure what this style */
 .mapbox-directions-routes li {
   font-size: 12px;
   padding: 10px 10px 10px 80px;
@@ -345,6 +363,8 @@
   color: rgba(255, 255, 255, 0.5);
   min-height: 60px;
 }
+
+/* hover over route list unsure whether redundant*/
 .mapbox-directions-routes li:hover,
 .mapbox-directions-routes .mapbox-directions-route-active {
   color: white;
@@ -354,13 +374,14 @@
   left: 10px;
   top: 10px;
 }
-/* Route Summary */
+
+/* Top box forRoute Summary */
 .mapbox-directions-route-summary {
   position: relative;
   z-index: 1;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.75);
-  color: #fff;
+  background-color: #E8F6FF;
+  color: #0092c5;
   padding: 5px 10px;
   font-size: 15px;
   line-height: 28px;
@@ -374,10 +395,13 @@
   font-size: inherit;
   line-height: inherit;
 }
+
+/*styles route duration in hours and minutes*/
 .mapbox-directions-route-summary span {
-  color: rgba(255, 255, 255, 0.5);
+  color: #0092C5;
   margin: 0 5px;
 }
+
 /* Alt route selection */
 .mapbox-directions-instructions {
   overflow: scroll;
@@ -396,8 +420,12 @@
 .mapbox-directions-routes input[type="radio"]:not(:checked) + .button:before {
   width: 0;
 }
-.mapbox-directions-routes input[type="radio"] + label {
-  background-color: rgba(255, 255, 255, 0.1);
+
+
+/*unsure - coul related to the X*/
+.mapbox-directions-routes input[type=radio]+label {
+  background-color: rgba(255, 255, 255, 0.10);
+
   float: left;
   padding: 0 10px;
   cursor: pointer;
@@ -421,8 +449,10 @@
   font-size: 20px;
   line-height: 25px;
 }
+
+/*step distance in ft*/
 .mapbox-directions-step-distance {
-  color: rgba(255, 255, 255, 0.5);
+  color: #0092C5;
   position: absolute;
   padding: 5px 10px;
   font-size: 12px;
@@ -435,9 +465,11 @@
   margin: 0;
   padding: 0;
 }
+
+/* step by step directions in route box*/
 .mapbox-directions-step {
   position: relative;
-  color: rgba(255, 255, 255, 0.75);
+  color: #0092C5;
   cursor: pointer;
   padding: 20px 20px 20px 40px;
   font-size: 14px;
@@ -449,26 +481,29 @@
   pointer-events: none;
 }
 .mapbox-directions-step:hover {
-  color: white;
+  color: #D57300;
 }
 .mapbox-directions-step:after {
   content: "";
   position: absolute;
   top: 45px;
   bottom: -10px;
-  border-left: 2px dotted rgba(255, 255, 255, 0.2);
+  border-left: 2px dotted #0092C5;
   left: 20px;
 }
 .mapbox-directions-step:last-child:after,
 .mapbox-directions-step:last-child .mapbox-directions-step-distance {
   display: none;
 }
+/*unsure what this styles*/
 .mapbox-marker-drag-icon {
   display: block;
   background-color: #444;
   border-radius: 50%;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
 }
+
+/*cannot locate style on map*/
 .mapbox-marker-drag-icon-step {
   background-color: #3bb2d0;
 }
