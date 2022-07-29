@@ -338,13 +338,15 @@
   background: #eee;
   color: #D57300;
 }
-/* Routes */
+/* Routes - unsure what this style */
 .mapbox-directions-routes ul {
   list-style: none;
   margin: 0;
   padding: 10px 10px 0 10px;
   border-bottom: 1px solid rgba(255, 255, 255, .25);
 }
+
+/* Routes - unsure what this style */
 .mapbox-directions-routes li {
   font-size: 12px;
   padding: 10px 10px 10px 80px;
@@ -354,6 +356,8 @@
   color: rgba(255, 255, 255, .5);
   min-height: 60px;
 }
+
+/* hover over route list unsure whether redundant*/
 .mapbox-directions-routes li:hover,
 .mapbox-directions-routes .mapbox-directions-route-active {
   color: white;
@@ -363,13 +367,14 @@
   left: 10px;
   top: 10px;
 }
-/* Route Summary */
+
+/* Top box for Route Summary */
 .mapbox-directions-route-summary {
   position: relative;
   z-index: 1;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.75);
-  color: #fff;
+  background-color: #E8F6FF;
+  color: #0092c5;
   padding: 5px 10px;
   font-size: 15px;
   line-height: 28px;
