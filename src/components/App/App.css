@@ -1,6 +1,9 @@
-
 .App {
   text-align: center;
+}
+.map-container{
+  width:100vw;
+  height:100vh;
 }
 .App-logo {
   height: 40vmin;
@@ -36,15 +39,12 @@
   box-sizing: border-box;
 }
 .mapboxgl-ctrl-geocoder {
-  font: 15px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font: 15px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
   position: relative;
   background-color: white;
   width: calc(100% - 360px);
-  ;
   min-width: calc(100% - 40px);
-  ;
   max-width: calc(100% - 40px);
-  ;
   margin-left: 40px;
   border-radius: 0 0 3px 0;
 }
@@ -52,27 +52,27 @@
   border-radius: 0 3px 0 0;
 }
 /*input location of destination #E8f6ff*/
-.mapboxgl-ctrl-geocoder input[type='text'] {
+.mapboxgl-ctrl-geocoder input[type="text"] {
   font-size: 12px;
   width: 100%;
   border: 0;
-  background-color:#E8f6ff;
+  background-color: #e8f6ff;
   height: 40px;
   margin: 0;
-  color: rgba(0, 0, 0, .5);
+  color: rgba(0, 0, 0, 0.5);
   padding: 10px 40px 10px 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
-.mapbox-directions-origin input[type='text'] {
+.mapbox-directions-origin input[type="text"] {
   box-shadow: 0 1px 0 0 #ddd;
   position: relative;
   z-index: 1;
 }
 /*input start and end destination text colour #0092C5*/
 .mapboxgl-ctrl-geocoder input:focus {
-  color: #0092C5;
+  color: #0092c5;
   outline: 0;
   outline: thin dotted\8;
 }
@@ -126,7 +126,7 @@
   top: auto;
   bottom: 100%;
 }
-.mapboxgl-ctrl-geocoder ul>li>a {
+.mapboxgl-ctrl-geocoder ul > li > a {
   clear: both;
   cursor: default;
   display: block;
@@ -137,11 +137,11 @@
   white-space: nowrap;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-.mapboxgl-ctrl-geocoder ul>li:last-child>a {
+.mapboxgl-ctrl-geocoder ul > li:last-child > a {
   border-bottom: none;
 }
-.mapboxgl-ctrl-geocoder ul>li.active>a,
-.mapboxgl-ctrl-geocoder ul>li>a:hover {
+.mapboxgl-ctrl-geocoder ul > li.active > a,
+.mapboxgl-ctrl-geocoder ul > li > a:hover {
   background-color: #eee;
   text-decoration: none;
   cursor: pointer;
@@ -222,7 +222,7 @@
   border-radius: 3px;
 }
 .directions-control {
-  font: 15px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font: 15px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 /* Layout containers */
 .directions-control {
@@ -312,29 +312,29 @@
   border-radius: 16px;
   padding: 3px 5px;
   font-size: 12px;
-  color: rgba(0, 0, 0, .5);
+  color: rgba(0, 0, 0, 0.5);
   line-height: 20px;
   text-align: center;
   width: 25%;
   float: left;
 }
 .mapbox-directions-profile label:hover {
-  color: rgba(0, 0, 0, .75);
+  color: rgba(0, 0, 0, 0.75);
 }
-.mapbox-directions-profile input[type=radio] {
+.mapbox-directions-profile input[type="radio"] {
   display: none;
 }
-.mapbox-directions-profile input[type=radio]:checked+label:hover,
-.mapbox-directions-profile input[type=radio]:checked+label {
+.mapbox-directions-profile input[type="radio"]:checked + label:hover,
+.mapbox-directions-profile input[type="radio"]:checked + label {
   background: #eee;
-  color: rgba(0, 0, 0, .75);
+  color: rgba(0, 0, 0, 0.75);
 }
 /* Routes */
 .mapbox-directions-routes ul {
   list-style: none;
   margin: 0;
   padding: 10px 10px 0 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, .25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 }
 .mapbox-directions-routes li {
   font-size: 12px;
@@ -342,7 +342,7 @@
   display: block;
   position: relative;
   cursor: pointer;
-  color: rgba(255, 255, 255, .5);
+  color: rgba(255, 255, 255, 0.5);
   min-height: 60px;
 }
 .mapbox-directions-routes li:hover,
@@ -365,7 +365,8 @@
   font-size: 15px;
   line-height: 28px;
 }
-.mapbox-directions-route-summary+.mapbox-directions-instructions {}
+.mapbox-directions-route-summary + .mapbox-directions-instructions {
+}
 .mapbox-directions-route-summary h1 {
   font-weight: 500;
   margin: 0;
@@ -389,20 +390,20 @@
   font-size: 12px;
   float: right;
 }
-.mapbox-directions-routes input[type=radio] {
+.mapbox-directions-routes input[type="radio"] {
   display: none;
 }
-.mapbox-directions-routes input[type=radio]:not(:checked)+.button:before {
+.mapbox-directions-routes input[type="radio"]:not(:checked) + .button:before {
   width: 0;
 }
-.mapbox-directions-routes input[type=radio]+label {
-  background-color: rgba(255, 255, 255, 0.10);
+.mapbox-directions-routes input[type="radio"] + label {
+  background-color: rgba(255, 255, 255, 0.1);
   float: left;
   padding: 0 10px;
   cursor: pointer;
 }
-.mapbox-directions-routes input[type=radio]+label:hover,
-.mapbox-directions-routes input[type=radio]:checked+label {
+.mapbox-directions-routes input[type="radio"] + label:hover,
+.mapbox-directions-routes input[type="radio"]:checked + label {
   background-color: rgba(255, 255, 255, 0.25);
 }
 /* Instructions */
@@ -421,7 +422,7 @@
   line-height: 25px;
 }
 .mapbox-directions-step-distance {
-  color: rgba(255, 255, 255, .5);
+  color: rgba(255, 255, 255, 0.5);
   position: absolute;
   padding: 5px 10px;
   font-size: 12px;
@@ -436,7 +437,7 @@
 }
 .mapbox-directions-step {
   position: relative;
-  color: rgba(255, 255, 255, .75);
+  color: rgba(255, 255, 255, 0.75);
   cursor: pointer;
   padding: 20px 20px 20px 40px;
   font-size: 14px;
@@ -451,11 +452,11 @@
   color: white;
 }
 .mapbox-directions-step:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 45px;
   bottom: -10px;
-  border-left: 2px dotted rgba(255, 255, 255, .2);
+  border-left: 2px dotted rgba(255, 255, 255, 0.2);
   left: 20px;
 }
 .mapbox-directions-step:last-child:after,
@@ -469,17 +470,17 @@
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
 }
 .mapbox-marker-drag-icon-step {
-  background-color: #3BB2D0;
+  background-color: #3bb2d0;
 }
 .mapbox-directions-clearfix:after {
-  content: '';
+  content: "";
   display: block;
   height: 0;
   clear: both;
   visibility: hidden;
 }
 /* Mobile */
-@media only screen and (max-width:640px) {
+@media only screen and (max-width: 640px) {
   /* Containers */
   .directions-control.directions-control {
     width: 100%;
@@ -598,4 +599,3 @@
     transform: rotate(360deg);
   }
 }
-
