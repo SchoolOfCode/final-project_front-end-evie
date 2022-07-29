@@ -4,33 +4,13 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
-// import Mapp from '../Markers/Markers'
+import data from '../../libs/data';
 
 
 
-mapboxgl.accessToken='pk.eyJ1IjoibmVlbW9kYWIiLCJhIjoiY2w2MGpqNDVlMWtlMzNscnRzamk4MmJ6diJ9.I_R2v2UXU5W1-25uPNwePQ';
+mapboxgl.accessToken=process.env.REACT_APP_API_KEY;
 
-// Sample data 
-const data = [
-	{
-		"location": "Manhattan Ave & Norman Ave at NE corner",
-		"city": "Brooklyn",
-		"state": "New York",
-		"coordinates": [-73.9516030004786,40.72557300071668],
-	},
-	{
-		"location": "6th Ave & 42nd St at NW corner",
-		"city": "Manhattan",
-		"state": "New York",
-		"coordinates": [-73.98393399979334,40.75533300052329],
-	},
-	{
-		"location": "Essex St & Delancey St at SE corner",
-		"city": "Manhattan",
-		"state": "New York",
-		"coordinates": [-73.9882730001973,40.718207001246554],
-	}
-]
+
 
 function App() {
   const mapContainer = useRef(null);
@@ -90,7 +70,6 @@ setZoom(map.current.getZoom().toFixed(2));
   <div>
 
   </div>
-  {/* <Mapp /> */}
   </>
 
   );
