@@ -478,13 +478,14 @@
   position: absolute;
   top: 45px;
   bottom: -10px;
-  border-left: 2px dotted rgba(255, 255, 255, .2);
+  border-left: 2px dotted #0092C5;
   left: 20px;
 }
 .mapbox-directions-step:last-child:after,
 .mapbox-directions-step:last-child .mapbox-directions-step-distance {
   display: none;
 }
+/*unsure what this styles*/
 .mapbox-marker-drag-icon {
   display: block;
   background-color: #444;
@@ -492,7 +493,7 @@
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
 }
 .mapbox-marker-drag-icon-step {
-  background-color: #3BB2D0;
+  background-color: #e412bd;
 }
 .mapbox-directions-clearfix:after {
   content: '';
