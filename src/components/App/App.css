@@ -59,14 +59,14 @@
   background-color:#E8f6ff;
   height: 40px;
   margin: 0;
-  color: rgba(0, 0, 0, .5);
+  color: #0092C5;
   padding: 10px 40px 10px 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 .mapbox-directions-origin input[type='text'] {
-  box-shadow: 0 1px 0 0 #ddd;
+  box-shadow: 0 1px 0 0 #0092C5;
   position: relative;
   z-index: 1;
 }
@@ -84,7 +84,7 @@
 .mapboxgl-ctrl-geocoder button {
   padding: 0;
   margin: 0;
-  background-color: rgb(101, 22, 22);
+  background-color: rgb(241, 10, 10);
   border: none;
   cursor: pointer;
 }
@@ -217,8 +217,10 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+/*outline and colour of the destination box*/
 .mapbox-directions-component-keyline {
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 15px #0092C5;
   border-radius: 3px;
 }
 .directions-control {
@@ -229,9 +231,10 @@
   width: 100%;
   z-index: 1;
 }
+/*background colour of step by step directions*/
 .directions-control.directions-control-directions {
-  background: rgba(0, 0, 0, 0.75);
-  margin: 7px 0 0;
+  background: #E8F6FF;
+  margin: 18px 0 0;
   color: #fff;
   top: 0;
   right: 0;
@@ -492,8 +495,10 @@
   border-radius: 50%;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
 }
+
+/*cannot locate style on map*/
 .mapbox-marker-drag-icon-step {
-  background-color: #e412bd;
+  background-color: #3BB2D0;
 }
 .mapbox-directions-clearfix:after {
   content: '';
