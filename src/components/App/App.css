@@ -368,7 +368,7 @@
   top: 10px;
 }
 
-/* Top box for Route Summary */
+/* Top box forRoute Summary */
 .mapbox-directions-route-summary {
   position: relative;
   z-index: 1;
@@ -387,10 +387,13 @@
   font-size: inherit;
   line-height: inherit;
 }
+
+/*styles route duration in hours and minutes*/
 .mapbox-directions-route-summary span {
-  color: rgba(255, 255, 255, 0.5);
+  color: #0092C5;
   margin: 0 5px;
 }
+
 /* Alt route selection */
 .mapbox-directions-instructions {
   overflow: scroll;
@@ -409,6 +412,8 @@
 .mapbox-directions-routes input[type=radio]:not(:checked)+.button:before {
   width: 0;
 }
+
+/*unsure - coul related to the X*/
 .mapbox-directions-routes input[type=radio]+label {
   background-color: rgba(255, 255, 255, 0.10);
   float: left;
@@ -434,8 +439,10 @@
   font-size: 20px;
   line-height: 25px;
 }
+
+/*step distance in ft*/
 .mapbox-directions-step-distance {
-  color: rgba(255, 255, 255, .5);
+  color: #0092C5;
   position: absolute;
   padding: 5px 10px;
   font-size: 12px;
@@ -448,9 +455,11 @@
   margin: 0;
   padding: 0;
 }
+
+/* step by step directions in route box*/
 .mapbox-directions-step {
   position: relative;
-  color: rgba(255, 255, 255, .75);
+  color: #0092C5;
   cursor: pointer;
   padding: 20px 20px 20px 40px;
   font-size: 14px;
@@ -462,7 +471,7 @@
   pointer-events: none;
 }
 .mapbox-directions-step:hover {
-  color: white;
+  color: #D57300;
 }
 .mapbox-directions-step:after {
   content: '';
