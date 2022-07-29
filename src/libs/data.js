@@ -1,23 +1,27 @@
 // Sample data 
  const data = [
 	{
-		"location": "Manhattan Ave & Norman Ave at NE corner",
-		"city": "Brooklyn",
-		"state": "New York",
-		"coordinates": [-73.9516030004786,40.72557300071668],
-	},
-	{
-		"location": "6th Ave & 42nd St at NW corner",
-		"city": "Manhattan",
-		"state": "New York",
-		"coordinates": [-73.98393399979334,40.75533300052329],
-	},
-	{
-		"location": "Essex St & Delancey St at SE corner",
-		"city": "Manhattan",
-		"state": "New York",
-		"coordinates": [-73.9882730001973,40.718207001246554],
-	}
+        "name": "Chargemaster Charging Station",
+        "location": "Level 1, Moor Street",
+        "city": "Birmingham",
+        "status": "Working",
+        "coordinates": [-1.8914254352674031, 52.477967538028295],
+      },
+      {
+        "name": "Pod Point Charging Station",
+        "location": "Bullring Shopping Centre",
+        "city": "Birmingham",
+        "status": "Working",
+        "coordinates": [-1.894960591508693, 52.47732788525904],
+      },
+      {
+        "name": "ESB Charging Station",
+        "location": "Dudley Street",
+        "city": "Birmingham",
+        "status": "Working",
+        "coordinates": [-1.896783880669363, 52.47659222206779],
+      },
+    
 ]
 
 export default data;

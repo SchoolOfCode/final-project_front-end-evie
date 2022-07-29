@@ -39,7 +39,7 @@ map.current.addControl(
         var marker = new mapboxgl.Marker()
                 .setLngLat(location.coordinates)
                 .setPopup(new mapboxgl.Popup({ offset: 30 })
-                .setHTML('<h4>' + location.city + '</h4>' + location.location))
+                .setHTML('<h4>' + location.name + '</h4>' + location.location + '<h4>' + location.city + '<h4>' + location.status))
                 .addTo(map.current);
   
       })
