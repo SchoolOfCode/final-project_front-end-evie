@@ -32,7 +32,7 @@ map.current.addControl(
         new MapboxDirections({
           accessToken: mapboxgl.accessToken
         }),
-        'top-right'
+        'top-left'
       );
 
       data.forEach((location) => {
@@ -65,7 +65,7 @@ setZoom(map.current.getZoom().toFixed(2));
     <>
   <div>
     <div className="sidebar">
-      Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+      {/*Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}*/}
     </div>
     <div ref={mapContainer} className="map-container" />
   </div>
