@@ -1,16 +1,13 @@
-import React, { useRef, useEffect, useState } from 'react';
+import  React, { useRef, useEffect, useState } from 'react';
 import './App.css';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 //import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
 import data from '../../libs/data';
-
-
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 mapboxgl.accessToken=process.env.REACT_APP_API_KEY;
-
-
 
 function App() {
   const mapContainer = useRef(null);
@@ -18,7 +15,7 @@ function App() {
   const [lng, setLng] = useState(-1.898575);
   const [lat, setLat] = useState(52.489471);
   const [zoom, setZoom] = useState(9);
-
+  
   //'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84'
 useEffect(() => {
 if (map.current) return; // initialize map only once
@@ -27,14 +24,30 @@ container: mapContainer.current,
 style: 'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84',
 center: [lng, lat],
 zoom: zoom
-});
-map.current.addControl(
-        new MapboxDirections({
-          accessToken: mapboxgl.accessToken
-        }),
-        'top-right'
-      );
+}
+);
 
+//Drop down directions
+map.current.addControl(
+  new MapboxDirections({
+    accessToken: mapboxgl.accessToken
+  }),
+  'top-right'
+  );
+
+// Add geolocate control to the map.
+map.current.addControl(
+    new mapboxgl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+        // When active the map will receive updates to the device's location as it changes.
+        trackUserLocation: true,
+        // Draw an arrow next to the location dot to indicate which direction the device is heading.
+        showUserHeading: true
+    })
+);
+  //popup and markers
       data.forEach((location) => {
         console.log(location)
         // eslint-disable-next-line
@@ -58,9 +71,6 @@ setZoom(map.current.getZoom().toFixed(2));
 });
 });
 
-
-  
-
   return (
     <>
   <div>
@@ -70,10 +80,8 @@ setZoom(map.current.getZoom().toFixed(2));
     <div ref={mapContainer} className="map-container" />
   </div>
   <div>
-
   </div>
-  </>
-
+</>
   );
 }
 
