@@ -30,7 +30,8 @@ zoom: zoom
 });
 map.current.addControl(
         new MapboxDirections({
-          accessToken: mapboxgl.accessToken
+          accessToken: mapboxgl.accessToken,
+          controls: {profileSwitcher:false},
         }),
         'top-left'
       );
