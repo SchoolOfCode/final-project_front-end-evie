@@ -29,7 +29,11 @@ zoom: zoom
 }
 );
 
-
+    //Drop down directions
+    map.current.on('load', function() {
+      const directions = new MapboxDirections({
+        accessToken: mapboxgl.accessToken
+      });
 // Add geolocate control to the map.
 // map.current.addControl(
   const geolocate = new mapboxgl.GeolocateControl({
@@ -49,17 +53,22 @@ zoom: zoom
     // when a geolocate event occurs.
     geolocate.on('geolocate', function (ev) {
       console.log(ev.coords)
+      var lon = ev.coords.longitude;
+      var lat = ev.coords.latitude
+      var position = [lon, lat];
+      directions.setOrigin(position)
+      return position;
+      // console.log(position);
     });
-    //Drop down directions
-    map.current.on('load', function() {
-  const directions = new MapboxDirections({
-    accessToken: mapboxgl.accessToken
-  });
-  map.current.addControl(directions,
-    'top-right');
-    directions.setOrigin(geolocate)
-    // console.log(geolocate.ev.coords); // you'll get the coordinates
-  });
+    map.current.addControl(directions,
+ 'top-right');
+//  console.log(position)
+ // console.log(geolocate.ev.coords); // you'll get the coordinates
+});
+
+
+
+ 
     async function Fetch() {
       const response = await fetch('https://api.openchargemap.io/v3/poi?maxresults=500&distance=200&includecomments=true&verbose=false&compact=true&boundingbox=(53.38997%2C%20-2.91819)%2C%20(51.36836%2C%20-0.16149)&key=267df5b8-6a34-4295-970a-3072b912f363');
       // waits until the request completes...
