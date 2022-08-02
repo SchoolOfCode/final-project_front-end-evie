@@ -471,17 +471,11 @@
 .mapbox-directions-route-summary+.mapbox-directions-instructions {}
 
 .mapbox-directions-route-summary h1 {
-
   font-weight: 500;
-
   margin: 0;
-
   display: inline;
-
   font-size: inherit;
-
   line-height: inherit;
-
 }
 
  
@@ -500,9 +494,7 @@
 }
 
 .mapbox-directions-instructions-wrapper {
-
   max-height: 50vh;
-
 }
 
 .mapbox-directions-routes {
@@ -547,208 +539,147 @@
 }
 
 .mapbox-directions-error {
-
   padding: 20px;
-
   font-size: 20px;
-
   line-height: 25px;
-
 }
 
- 
-
 /*step distance in ft*/
-
 .mapbox-directions-step-distance {
-
   color: #0092C5;
-
   position: absolute;
-
   padding: 5px 10px;
-
   font-size: 12px;
-
   left: 30px;
-
   bottom: -10px;
-
 }
 
 .mapbox-directions-steps {
-
   position: relative;
-
   list-style: none;
-
   margin: 0;
-
   padding: 0;
-
 }
 
  
 
 /* step by step directions in route box*/
-
 .mapbox-directions-step {
-
   position: relative;
-
   color: #0092C5;
-
   cursor: pointer;
-
   padding: 20px 20px 20px 40px;
-
   font-size: 14px;
-
   line-height: 18px;
-
   font-weight: 300;
-
   letter-spacing: 0.1em;
-
 }
 
 .mapbox-directions-step * {
-
   pointer-events: none;
-
 }
 
 .mapbox-directions-step:hover {
-
   color: #D57300;
-
 }
 
 .mapbox-directions-step:after {
-
   content: '';
-
   position: absolute;
-
   top: 45px;
-
   bottom: -10px;
-
   border-left: 2px dotted #0092C5;
-
   left: 20px;
-
 }
 
 .mapbox-directions-step:last-child:after,
 
 .mapbox-directions-step:last-child .mapbox-directions-step-distance {
-
   display: none;
-
 }
 
 /*unsure what this styles*/
-
 .mapbox-marker-drag-icon {
-
   display: block;
-
   background-color: #444;
-
   border-radius: 50%;
-
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
-
 }
 
  
 
 /*cannot locate style on map*/
-
 .mapbox-marker-drag-icon-step {
-
   background-color: #3BB2D0;
-
 }
 
 .mapbox-directions-clearfix:after {
-
   content: '';
-
   display: block;
-
   height: 0;
-
   clear: both;
-
   visibility: hidden;
-
 }
 
 /* Mobile */
-
 @media only screen and (max-width:640px) {
 
   /* Containers */
-
   .directions-control.directions-control {
-
     width: 100%;
-
     max-width: 100%;
-
   }
 
   /* Input container */
-
   .directions-control.directions-control-inputs {
-
     top: 0;
-
     left: 0;
-
   }
 
   .mapbox-directions-profile {
-
     margin: 10px;
-
   }
 
   /* Instructions container */
-
   .mapbox-directions-routes {
-
     float: right;
-
     margin-right: 10px;
-
   }
 
   .directions-control.directions-control-directions {
-
     top: auto;
-
     max-height: 40%;
-
   }
 
   .mapbox-directions-multiple {
-
     min-height: 50px;
-
   }
-
 }
 
-
+/*step by step toggle*/
 .instruction-btn {
   left: 13%;
   top: 10%;
-  z-index: 3;
   position: relative;
+  font-size: 12px;
+  font-family: sans-serif;
+  width: 120px;
+  height: 30px;
+  border-width: 1px;
+  color: #fff;
+  border-color: #0092C5;
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  border-bottom-left-radius: 28px;
+  border-bottom-right-radius: 28px;
+  background: #0092C5;
 }
+
+.instruction-btn:hover {
+  background: #E8f6ff;
+  color: #0092C5;
+}
+
 
 @-webkit-keyframes rotate {
 

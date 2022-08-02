@@ -98,8 +98,6 @@ const toggledirections = (evt) => {
 
 
 
-  
-
   return (
     <>
   <div>
