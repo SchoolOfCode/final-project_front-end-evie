@@ -63,7 +63,7 @@ map.current.addControl(
               var marker = new mapboxgl.Marker()
                       .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
                       .setPopup(new mapboxgl.Popup({ offset: 30 })
-                      .setHTML('<h4>' + location.AddressInfo.Title + '</h4>' + location.location + '<h4>' + location.AddressInfo.Town + '<h4>' + location.status))
+                      .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
                       .addTo(map.current);
         
             })
