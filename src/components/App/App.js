@@ -4,8 +4,10 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 //import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
-import data from '../../libs/data';
+// import data from '../../libs/data';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+// import Fetch from './Fetch/Fetch'
+
 
 mapboxgl.accessToken=process.env.REACT_APP_API_KEY;
 
@@ -17,9 +19,9 @@ function App() {
   const [zoom, setZoom] = useState(9);
   
   //'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84'
-useEffect(() => {
-if (map.current) return; // initialize map only once
-map.current = new mapboxgl.Map({
+  useEffect(() => {
+    if (map.current) return; // initialize map only once
+    map.current = new mapboxgl.Map({
 container: mapContainer.current,
 style: 'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84',
 center: [lng, lat],
@@ -38,26 +40,36 @@ map.current.addControl(
 // Add geolocate control to the map.
 map.current.addControl(
     new mapboxgl.GeolocateControl({
-        positionOptions: {
-            enableHighAccuracy: true
+      positionOptions: {
+        enableHighAccuracy: true
         },
         // When active the map will receive updates to the device's location as it changes.
         trackUserLocation: true,
         // Draw an arrow next to the location dot to indicate which direction the device is heading.
         showUserHeading: true
-    })
-);
-  //popup and markers
-      data.forEach((location) => {
-        console.log(location)
-        // eslint-disable-next-line
-        var marker = new mapboxgl.Marker()
-                .setLngLat(location.coordinates)
-                .setPopup(new mapboxgl.Popup({ offset: 30 })
-                .setHTML('<h4>' + location.name + '</h4>' + location.location + '<h4>' + location.city + '<h4>' + location.status))
-                .addTo(map.current);
-  
       })
+      );
+      async function Fetch() {
+        const response = await fetch('https://api.openchargemap.io/v3/poi?maxresults=1&compact=true&boundingbox=(52.40493%2C%20-1.51230)%2C%20(52.49348%2C%20-2.06584)&key=267df5b8-6a34-4295-970a-3072b912f363');
+        // waits until the request completes...
+        const data = await response.json();
+        console.log(`${data[0]}from line 56`);
+        console.log(data[0].AddressInfo.Title)
+        //popup and markers
+            data.forEach((location) => {
+              console.log(`${location.AddressInfo.Title}line 60`)
+              console.log([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
+              // eslint-disable-next-line
+              var marker = new mapboxgl.Marker()
+                      .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
+                      .setPopup(new mapboxgl.Popup({ offset: 30 })
+                      .setHTML('<h4>' + location.AddressInfo.Title + '</h4>' + location.location + '<h4>' + location.AddressInfo.Town + '<h4>' + location.status))
+                      .addTo(map.current);
+        
+            })
+        return data;
+      }
+      Fetch()
 });
 		
 
@@ -81,6 +93,7 @@ setZoom(map.current.getZoom().toFixed(2));
   </div>
   <div>
   </div>
+  {/* <Fetch/> */}
 </>
   );
 }
