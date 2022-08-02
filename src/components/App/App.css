@@ -742,6 +742,14 @@
 
 }
 
+
+.instruction-btn {
+  left: 13%;
+  top: 10%;
+  z-index: 3;
+  position: relative;
+}
+
 @-webkit-keyframes rotate {
 
   from {

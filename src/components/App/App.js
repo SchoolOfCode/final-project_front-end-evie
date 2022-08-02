@@ -18,6 +18,7 @@ function App() {
   const [lng, setLng] = useState(-1.898575);
   const [lat, setLat] = useState(52.489471);
   const [zoom, setZoom] = useState(9);
+  
 
   //'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84'
 useEffect(() => {
@@ -32,6 +33,7 @@ map.current.addControl(
         new MapboxDirections({
           accessToken: mapboxgl.accessToken,
           controls: {profileSwitcher:false},
+          control:{instruction:true}
         }),
         'top-left'
       );
@@ -47,6 +49,7 @@ map.current.addControl(
   
       })
 });
+
 		
 
 //Store new coordinates that you get when a user interacts with the map
@@ -60,11 +63,47 @@ setZoom(map.current.getZoom().toFixed(2));
 });
 
 
+//toggle button on turn by turn navigation  
+useEffect(()=>{
+let routesummaryelement = document.getElementsByClassName('mapbox-directions-route-summary')[0]
+if(routesummaryelement){
+let button = routesummaryelement.querySelector('.instruction-btn')
+//console.log("hello line 71 in creating a button")
+if(button === null){
+const btn = document.createElement("button");
+btn.className = "instruction-btn";
+btn.addEventListener("click", toggledirections);
+btn.innerHTML = "hide directions";
+routesummaryelement.appendChild(btn);
+}
+}})
+
+
+const toggledirections = (evt) => {
+  //console.log("hello")
+  let elements = document.getElementsByClassName('mapbox-directions-instructions')
+  if (elements[0]){
+    if (elements[0].style.display === "none") {
+      evt.target.innerHTML="hide directions"
+    elements[0].style.display = "block";
+  } else {
+    elements[0].style.display = "none";
+    evt.target.innerHTML="show directions"
+  }
+  //console.log(elements[0])
+}
+
+
+}
+
+
+
   
 
   return (
     <>
   <div>
+   
     <div className="sidebar">
       {/*Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}*/}
     </div>
