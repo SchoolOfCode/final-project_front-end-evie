@@ -16,7 +16,7 @@ function App() {
   const map = useRef(null);
   const [lng, setLng] = useState(-1.898575);
   const [lat, setLat] = useState(52.489471);
-  const [zoom, setZoom] = useState(9);
+  const [zoom, setZoom] = useState(13);
   
   //'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84'
   useEffect(() => {
@@ -50,7 +50,7 @@ map.current.addControl(
       })
       );
       async function Fetch() {
-        const response = await fetch('https://api.openchargemap.io/v3/poi?maxresults=1&compact=true&boundingbox=(52.40493%2C%20-1.51230)%2C%20(52.49348%2C%20-2.06584)&key=267df5b8-6a34-4295-970a-3072b912f363');
+        const response = await fetch('https://api.openchargemap.io/v3/poi?maxresults=500&distance=200&includecomments=true&verbose=false&compact=true&boundingbox=(53.38997%2C%20-2.91819)%2C%20(51.36836%2C%20-0.16149)&key=267df5b8-6a34-4295-970a-3072b912f363');
         // waits until the request completes...
         const data = await response.json();
         console.log(`${data[0]}from line 56`);
