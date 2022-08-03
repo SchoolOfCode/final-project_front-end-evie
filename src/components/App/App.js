@@ -8,6 +8,13 @@ import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
 // import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 // import Fetch from './Fetch/Fetch'
 
+// async function Fetchpolyline() {
+//   const res = await fetch('https://api.openchargemap.io/v3/poi?maxresults=50&distance=1&polyline=iwfyHxy_%40_zDja%40&key=267df5b8-6a34-4295-970a-3072b912f363');
+//   // waits until the request completes...
+//   const info = await res.json();
+//   console.log(info)
+// }
+// Fetchpolyline()
 
 mapboxgl.accessToken=process.env.REACT_APP_API_KEY;
 
@@ -34,20 +41,22 @@ let directions
     map.current.on('load', function() {
        directions = new MapboxDirections({
       })
+      console.log(directions)
     });
     
-// Add geolocate control to the map.
-map.current.addControl(
+    // Add geolocate control to the map.
+    map.current.addControl(
   new MapboxDirections({
     accessToken: mapboxgl.accessToken,
     controls: {profileSwitcher:false},
-      control:{instruction:true}
-    
-
-        }),
-        'top-left'
-      );
-
+    control:{instruction:true}
+  }),
+  'top-left'
+  );
+      //   var lon = ev.coords.longitude;
+      //   var lat = ev.coords.latitude
+      //   var position = [lon, lat];
+      //   directions.setOrigin(position)
 
   const geolocate = new mapboxgl.GeolocateControl({
       positionOptions: {
@@ -63,13 +72,18 @@ map.current.addControl(
     // Set an event listener that fires
     // when a geolocate event occurs.
     geolocate.on('geolocate', function (ev) {
-      console.log(ev.coords)
+      // console.log(ev.coords)
       var lon = ev.coords.longitude;
       var lat = ev.coords.latitude
       var position = [lon, lat];
       directions.setOrigin(position)
+      // directions.setDestination([11, 22])
     });
-   
+   //plan 
+   // template literals for fetch request replacing long and lat
+   //we alredy have geolocation stroed in variable (position)
+   //if position== empty then use what is inputed into boxA else use geolocation
+   //store second input field e.target.value variable to use in fetch request
    
     async function Fetch() {
       const response = await fetch('https://api.openchargemap.io/v3/poi?maxresults=500&distance=200&includecomments=true&verbose=false&compact=true&boundingbox=(53.38997%2C%20-2.91819)%2C%20(51.36836%2C%20-0.16149)&key=267df5b8-6a34-4295-970a-3072b912f363');
