@@ -1,6 +1,27 @@
 .App {
   text-align: center;
 }
+.mapboxgl-ctrl-logo {
+  display: none !important;
+}
+.mapboxgl-ctrl-bottom-right {
+  display: none;
+}
+/* logo css */
+#logoContainer {
+  position: absolute;
+  z-index: 100;
+  top: 825px;
+  left: 20px;
+  opacity: 0.9 ;
+  border-radius: 35px;
+  background-position: left top;
+  background-repeat: repeat;
+  padding: 20px;
+  width: 100px;
+  height: 75px;
+  }
+
 .map-container{
   width:100vw;
   height:100vh;
