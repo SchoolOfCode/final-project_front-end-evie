@@ -29,19 +29,21 @@ center: [lng, lat],
 zoom: zoom
 }
 );
-
+let directions
     //Drop down directions
     map.current.on('load', function() {
-      const directions = new MapboxDirections({
-        accessToken: mapboxgl.accessToken
-        controls: {profileSwitcher:false},
-          control:{instruction:true}
-          }
-      });
-      
+       directions = new MapboxDirections({
+      })
+    });
+    
 // Add geolocate control to the map.
 map.current.addControl(
-        new MapboxDirections({
+  new MapboxDirections({
+    accessToken: mapboxgl.accessToken,
+    controls: {profileSwitcher:false},
+      control:{instruction:true}
+    
+
         }),
         'top-left'
       );
@@ -147,6 +149,11 @@ const toggledirections = (evt) => {
   </div>
   <div>
   </div>
+   <div id="map" >
+    <div>
+      <img id="logoContainer" src="../blue-logo.png" alt="logo" width="70" />
+    </div>
+ </div>
 </>
   );
 }
