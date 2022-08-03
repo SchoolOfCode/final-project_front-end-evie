@@ -5,7 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 //import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
 // import data from '../../libs/data';
-import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+// import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 // import Fetch from './Fetch/Fetch'
 
 
@@ -35,9 +35,7 @@ zoom: zoom
         accessToken: mapboxgl.accessToken
       });
 // Add geolocate control to the map.
-// map.current.addControl(
   const geolocate = new mapboxgl.GeolocateControl({
-    // var position = [lon, lat];
       positionOptions: {
         enableHighAccuracy: true
       },
@@ -47,7 +45,6 @@ zoom: zoom
       showUserHeading: true
     })
     
-    // );
     map.current.addControl(geolocate);
     // Set an event listener that fires
     // when a geolocate event occurs.
@@ -57,13 +54,9 @@ zoom: zoom
       var lat = ev.coords.latitude
       var position = [lon, lat];
       directions.setOrigin(position)
-      return position;
-      // console.log(position);
     });
     map.current.addControl(directions,
  'top-right');
-//  console.log(position)
- // console.log(geolocate.ev.coords); // you'll get the coordinates
 });
 
 
@@ -88,7 +81,6 @@ zoom: zoom
           Fetch()
 });
 
-// console.log(GeolocateControl.positionOptions)
 
 //Store new coordinates that you get when a user interacts with the map
 useEffect(() => {
@@ -110,7 +102,6 @@ setZoom(map.current.getZoom().toFixed(2));
   </div>
   <div>
   </div>
-  {/* <Fetch/> */}
 </>
   );
 }
