@@ -4,8 +4,10 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 //import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
-import data from '../../libs/data';
-import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+// import data from '../../libs/data';
+// import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+// import Fetch from './Fetch/Fetch'
+
 
 mapboxgl.accessToken=process.env.REACT_APP_API_KEY;
 
@@ -14,13 +16,13 @@ function App() {
   const map = useRef(null);
   const [lng, setLng] = useState(-1.898575);
   const [lat, setLat] = useState(52.489471);
-  const [zoom, setZoom] = useState(9);
+  const [zoom, setZoom] = useState(13);
   
 
   //'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84'
-useEffect(() => {
-if (map.current) return; // initialize map only once
-map.current = new mapboxgl.Map({
+  useEffect(() => {
+    if (map.current) return; // initialize map only once
+    map.current = new mapboxgl.Map({
 container: mapContainer.current,
 style: 'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84',
 center: [lng, lat],
@@ -28,43 +30,64 @@ zoom: zoom
 }
 );
 
-//Drop down directions
+    //Drop down directions
+    map.current.on('load', function() {
+      const directions = new MapboxDirections({
+        accessToken: mapboxgl.accessToken
+        controls: {profileSwitcher:false},
+          control:{instruction:true}
+          }
+      });
+      
+// Add geolocate control to the map.
 map.current.addControl(
         new MapboxDirections({
-          accessToken: mapboxgl.accessToken,
-          controls: {profileSwitcher:false},
-          control:{instruction:true}
         }),
         'top-left'
       );
 
 
-// Add geolocate control to the map.
-map.current.addControl(
-    new mapboxgl.GeolocateControl({
-        positionOptions: {
-            enableHighAccuracy: true
-        },
-        // When active the map will receive updates to the device's location as it changes.
-        trackUserLocation: true,
-        // Draw an arrow next to the location dot to indicate which direction the device is heading.
-        showUserHeading: true
+  const geolocate = new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true
+      },
+      // When active the map will receive updates to the device's location as it changes.
+      trackUserLocation: true,
+      // Draw an arrow next to the location dot to indicate which direction the device is heading.
+      showUserHeading: true
     })
-);
-  //popup and markers
+    
+    map.current.addControl(geolocate);
+    // Set an event listener that fires
+    // when a geolocate event occurs.
+    geolocate.on('geolocate', function (ev) {
+      console.log(ev.coords)
+      var lon = ev.coords.longitude;
+      var lat = ev.coords.latitude
+      var position = [lon, lat];
+      directions.setOrigin(position)
+    });
+   
+   
+    async function Fetch() {
+      const response = await fetch('https://api.openchargemap.io/v3/poi?maxresults=500&distance=200&includecomments=true&verbose=false&compact=true&boundingbox=(53.38997%2C%20-2.91819)%2C%20(51.36836%2C%20-0.16149)&key=267df5b8-6a34-4295-970a-3072b912f363');
+      // waits until the request completes...
+      const data = await response.json();
+      //popup and markers
       data.forEach((location) => {
-        console.log(location)
-        // eslint-disable-next-line
-        var marker = new mapboxgl.Marker()
-                .setLngLat(location.coordinates)
-                .setPopup(new mapboxgl.Popup({ offset: 30 })
-                .setHTML('<h4>' + location.name + '</h4>' + location.location + '<h4>' + location.city + '<h4>' + location.status))
-                .addTo(map.current);
-  
-      })
+              // eslint-disable-next-line
+              var marker = new mapboxgl.Marker()
+                      .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
+                      .setPopup(new mapboxgl.Popup({ offset: 30 })
+                      .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
+                      .addTo(map.current);
+        
+            })
+            return data;
+          }
+          Fetch()
 });
 
-		
 
 //Store new coordinates that you get when a user interacts with the map
 useEffect(() => {
