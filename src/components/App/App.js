@@ -18,6 +18,7 @@ function App() {
   const [lat, setLat] = useState(52.489471);
   const [zoom, setZoom] = useState(13);
   
+
   //'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84'
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -33,8 +34,19 @@ zoom: zoom
     map.current.on('load', function() {
       const directions = new MapboxDirections({
         accessToken: mapboxgl.accessToken
+        controls: {profileSwitcher:false},
+          control:{instruction:true}
+          }
       });
+      
 // Add geolocate control to the map.
+map.current.addControl(
+        new MapboxDirections({
+        }),
+        'top-left'
+      );
+
+
   const geolocate = new mapboxgl.GeolocateControl({
       positionOptions: {
         enableHighAccuracy: true
@@ -55,13 +67,8 @@ zoom: zoom
       var position = [lon, lat];
       directions.setOrigin(position)
     });
-    map.current.addControl(directions,
- 'top-right');
-});
-
-
-
- 
+   
+   
     async function Fetch() {
       const response = await fetch('https://api.openchargemap.io/v3/poi?maxresults=500&distance=200&includecomments=true&verbose=false&compact=true&boundingbox=(53.38997%2C%20-2.91819)%2C%20(51.36836%2C%20-0.16149)&key=267df5b8-6a34-4295-970a-3072b912f363');
       // waits until the request completes...
@@ -92,11 +99,49 @@ setZoom(map.current.getZoom().toFixed(2));
 });
 });
 
+
+
+//toggle button on turn by turn navigation  
+useEffect(()=>{
+let routesummaryelement = document.getElementsByClassName('mapbox-directions-route-summary')[0]
+if(routesummaryelement){
+let button = routesummaryelement.querySelector('.instruction-btn')
+//console.log("hello line 71 in creating a button")
+if(button === null){
+const btn = document.createElement("button");
+btn.className = "instruction-btn";
+btn.addEventListener("click", toggledirections);
+btn.innerHTML = "hide directions";
+routesummaryelement.appendChild(btn);
+}
+}})
+
+
+const toggledirections = (evt) => {
+  //console.log("hello")
+  let elements = document.getElementsByClassName('mapbox-directions-instructions')
+  if (elements[0]){
+    if (elements[0].style.display === "none") {
+      evt.target.innerHTML="hide directions"
+    elements[0].style.display = "block";
+  } else {
+    elements[0].style.display = "none";
+    evt.target.innerHTML="show directions"
+  }
+  //console.log(elements[0])
+}
+
+
+}
+
+
+
   return (
     <>
   <div>
+   
     <div className="sidebar">
-      Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+      {/*Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}*/}
     </div>
     <div ref={mapContainer} className="map-container" />
   </div>
