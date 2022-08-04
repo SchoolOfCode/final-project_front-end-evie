@@ -7,7 +7,7 @@ import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
 // import data from '../../libs/data';
 // import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 // import Fetch from './Fetch/Fetch'
-
+// import ratingChanged from '../forms/forms'
 
 mapboxgl.accessToken=process.env.REACT_APP_API_KEY;
 
@@ -154,6 +154,7 @@ const toggledirections = (evt) => {
       <img id="logoContainer" src="../blue-logo.png" alt="logo" width="70" />
     </div>
  </div>
+ {/* <ratingChanged/> */}
 </>
   );
 }
