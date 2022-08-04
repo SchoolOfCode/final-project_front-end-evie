@@ -3,18 +3,13 @@ import './App.css';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
+import { decode, encode } from "@googlemaps/polyline-codec";
 //import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
 // import data from '../../libs/data';
 // import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 // import Fetch from './Fetch/Fetch'
 
-// async function Fetchpolyline() {
-//   const res = await fetch('https://api.openchargemap.io/v3/poi?maxresults=50&distance=1&polyline=iwfyHxy_%40_zDja%40&key=267df5b8-6a34-4295-970a-3072b912f363');
-//   // waits until the request completes...
-//   const info = await res.json();
-//   console.log(info)
-// }
-// Fetchpolyline()
+
 
 mapboxgl.accessToken=process.env.REACT_APP_API_KEY;
 
@@ -23,8 +18,10 @@ function App() {
   const map = useRef(null);
   const [lng, setLng] = useState(-1.898575);
   const [lat, setLat] = useState(52.489471);
-  const [zoom, setZoom] = useState(13);
+  const [zoom, setZoom] = useState(8);
   
+ 
+
 
   //'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84'
   useEffect(() => {
@@ -43,16 +40,75 @@ let directions
       })
       console.log(directions)
     });
+
     
+    map.current.on('sourcedata', (e) => {
+
+   
+      const path = [
+       [e.source.data.features[0].geometry.coordinates[1], e.source.data.features[0].geometry.coordinates[0]],
+        [e.source.data.features[1].geometry.coordinates[1], e.source.data.features[1].geometry.coordinates[0]]
+      ];
+      console.log(encode(path, 5));
+
+      const result = encode(path, 5);
+      console.log(result);
+      console.log(path);
+
+      const encoded = "~ejLmqs_I{tv@fqI";
+console.log(decode(encoded, 5));
+// [
+//   [38.5, -120.2],
+//   [40.7, -120.95],
+//   [43.252, -126.453],
+// ]
+
+  // poly line 'https://api.openchargemap.io/v3/poi?polyline=csn_I%7CpqJjsFuxJ&key=267df5b8-6a34-4295-970a-3072b912f363'
+
+      async function Fetchpolyline() {
+        console.log(result)
+        const res = await fetch(`https://api.openchargemap.io/v3/poi?polyline=${result}&key=267df5b8-6a34-4295-970a-3072b912f363`);
+        // waits until the request completes...
+        const info = await res.json();
+       //popup and markers
+       info.forEach((location) => {
+        // eslint-disable-next-line
+        var marker = new mapboxgl.Marker()
+                .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
+                .setPopup(new mapboxgl.Popup({ offset: 30 })
+                .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
+                .addTo(map.current);
+      
+      })
+      console.log(info)
+      return info;
+      }
+      Fetchpolyline()
+
+      // console.log(e);
+      // console.log(e.target._easeOptions.center[0])
+      // console.log(e.target._easeOptions.center[1])
+      // console.log(e.target._easeOptions.center.lng)
+      // console.log(e.target._easeOptions.center.lat)
+      //start point
+      console.log(e.source.data.features[0].geometry.coordinates[0]);
+      console.log(e.source.data.features[0].geometry.coordinates[1]);
+      console.log(e.source.data.features[1].geometry.coordinates[0])
+      console.log(e.source.data.features[1].geometry.coordinates[1])
+
+//put polyline here?
+
+    })
     // Add geolocate control to the map.
     map.current.addControl(
-  new MapboxDirections({
-    accessToken: mapboxgl.accessToken,
-    controls: {profileSwitcher:false},
-    control:{instruction:true}
-  }),
-  'top-left'
-  );
+      new MapboxDirections({
+        accessToken: mapboxgl.accessToken,
+        controls: {profileSwitcher:false},
+        control:{instruction:true}
+      }),
+      'top-left'
+      );
+
       //   var lon = ev.coords.longitude;
       //   var lat = ev.coords.latitude
       //   var position = [lon, lat];
@@ -84,24 +140,25 @@ let directions
    //we alredy have geolocation stroed in variable (position)
    //if position== empty then use what is inputed into boxA else use geolocation
    //store second input field e.target.value variable to use in fetch request
-   
-    async function Fetch() {
-      const response = await fetch('https://api.openchargemap.io/v3/poi?maxresults=500&distance=200&includecomments=true&verbose=false&compact=true&boundingbox=(53.38997%2C%20-2.91819)%2C%20(51.36836%2C%20-0.16149)&key=267df5b8-6a34-4295-970a-3072b912f363');
-      // waits until the request completes...
-      const data = await response.json();
-      //popup and markers
-      data.forEach((location) => {
-              // eslint-disable-next-line
-              var marker = new mapboxgl.Marker()
-                      .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
-                      .setPopup(new mapboxgl.Popup({ offset: 30 })
-                      .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
-                      .addTo(map.current);
+
+  //    
+    // async function Fetch() {
+    //   const response = await fetch('https://api.openchargemap.io/v3/poi?maxresults=500&distance=200&includecomments=true&verbose=false&compact=true&boundingbox=(53.38997%2C%20-2.91819)%2C%20(51.36836%2C%20-0.16149)&key=267df5b8-6a34-4295-970a-3072b912f363' );
+    //   // waits until the request completes...
+    //   const data = await response.json();
+    //   //popup and markers
+    //   data.forEach((location) => {
+    //           // eslint-disable-next-line
+    //           var marker = new mapboxgl.Marker()
+    //                   .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
+    //                   .setPopup(new mapboxgl.Popup({ offset: 30 })
+    //                   .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
+    //                   .addTo(map.current);
         
-            })
-            return data;
-          }
-          Fetch()
+    //         })
+    //         return data;
+    //       }
+    //       Fetch()
 });
 
 
