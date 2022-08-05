@@ -3,13 +3,9 @@ import './App.css';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
-import { decode, encode } from "@googlemaps/polyline-codec";
+import { encode } from "@googlemaps/polyline-codec";
 //import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
-// import data from '../../libs/data';
 // import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-// import Fetch from './Fetch/Fetch'
-
-
 
 mapboxgl.accessToken=process.env.REACT_APP_API_KEY;
 
@@ -19,9 +15,6 @@ function App() {
   const [lng, setLng] = useState(-1.898575);
   const [lat, setLat] = useState(52.489471);
   const [zoom, setZoom] = useState(8);
-  
- 
-
 
   //'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84'
   useEffect(() => {
@@ -38,35 +31,19 @@ let directions
     map.current.on('load', function() {
        directions = new MapboxDirections({
       })
-      console.log(directions)
     });
 
-    
     map.current.on('sourcedata', (e) => {
-
-   
       const path = [
        [e.source.data.features[0].geometry.coordinates[1], e.source.data.features[0].geometry.coordinates[0]],
         [e.source.data.features[1].geometry.coordinates[1], e.source.data.features[1].geometry.coordinates[0]]
       ];
-      console.log(encode(path, 5));
-
+      // console.log(encode(path, 5));
       const result = encode(path, 5);
-      console.log(result);
-      console.log(path);
-
-      const encoded = "~ejLmqs_I{tv@fqI";
-console.log(decode(encoded, 5));
-// [
-//   [38.5, -120.2],
-//   [40.7, -120.95],
-//   [43.252, -126.453],
-// ]
 
   // poly line 'https://api.openchargemap.io/v3/poi?polyline=csn_I%7CpqJjsFuxJ&key=267df5b8-6a34-4295-970a-3072b912f363'
 
       async function Fetchpolyline() {
-        console.log(result)
         const res = await fetch(`https://api.openchargemap.io/v3/poi?polyline=${result}&key=267df5b8-6a34-4295-970a-3072b912f363`);
         // waits until the request completes...
         const info = await res.json();
@@ -78,25 +55,21 @@ console.log(decode(encoded, 5));
                 .setPopup(new mapboxgl.Popup({ offset: 30 })
                 .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
                 .addTo(map.current);
-      
       })
-      console.log(info)
+      // console.log(info)
       return info;
       }
       Fetchpolyline()
-
-      // console.log(e);
+      console.log(e);
       // console.log(e.target._easeOptions.center[0])
       // console.log(e.target._easeOptions.center[1])
       // console.log(e.target._easeOptions.center.lng)
       // console.log(e.target._easeOptions.center.lat)
       //start point
-      console.log(e.source.data.features[0].geometry.coordinates[0]);
-      console.log(e.source.data.features[0].geometry.coordinates[1]);
-      console.log(e.source.data.features[1].geometry.coordinates[0])
-      console.log(e.source.data.features[1].geometry.coordinates[1])
-
-//put polyline here?
+      // console.log(e.source.data.features[0].geometry.coordinates[0]);
+      // console.log(e.source.data.features[0].geometry.coordinates[1]);
+      // console.log(e.source.data.features[1].geometry.coordinates[0])
+      // console.log(e.source.data.features[1].geometry.coordinates[1])
 
     })
     // Add geolocate control to the map.
@@ -108,11 +81,6 @@ console.log(decode(encoded, 5));
       }),
       'top-left'
       );
-
-      //   var lon = ev.coords.longitude;
-      //   var lat = ev.coords.latitude
-      //   var position = [lon, lat];
-      //   directions.setOrigin(position)
 
   const geolocate = new mapboxgl.GeolocateControl({
       positionOptions: {
@@ -132,35 +100,52 @@ console.log(decode(encoded, 5));
       var lon = ev.coords.longitude;
       var lat = ev.coords.latitude
       var position = [lon, lat];
+      console.log(position);
       directions.setOrigin(position)
-      // directions.setDestination([11, 22])
-    });
-   //plan 
-   // template literals for fetch request replacing long and lat
-   //we alredy have geolocation stroed in variable (position)
-   //if position== empty then use what is inputed into boxA else use geolocation
-   //store second input field e.target.value variable to use in fetch request
-
-  //    
-    // async function Fetch() {
-    //   const response = await fetch('https://api.openchargemap.io/v3/poi?maxresults=500&distance=200&includecomments=true&verbose=false&compact=true&boundingbox=(53.38997%2C%20-2.91819)%2C%20(51.36836%2C%20-0.16149)&key=267df5b8-6a34-4295-970a-3072b912f363' );
-    //   // waits until the request completes...
-    //   const data = await response.json();
-    //   //popup and markers
-    //   data.forEach((location) => {
-    //           // eslint-disable-next-line
-    //           var marker = new mapboxgl.Marker()
-    //                   .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
-    //                   .setPopup(new mapboxgl.Popup({ offset: 30 })
-    //                   .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
-    //                   .addTo(map.current);
+      
+  
+      console.log(`current lon ${lon}`);
+      console.log(`current lat ${lat}`);
+      var topLeftLat = (lat + 0.003758);
+      console.log(`top left lat ${topLeftLat}`)
+      var topLeftLon = (lon + 0.003758);
+      console.log(`top left lon ${topLeftLon}`)
+      var bottomRightLat = (lat - 0.003758);
+   console.log(`bottom right lat ${bottomRightLat}`)
+   var bottomRightLon = (lon - 0.003758);
+   console.log(`bottom right lon ${bottomRightLon}`)
+  //  var boundingBox1 = (topLeftLat-topLeftLon);
+  //  var boundingBox2 = (bottomRightLat-bottomRightLon);
+  //  console.log(boundingBox1)
+  //  console.log(boundingBox2)
+   
+  
+//plan 
+// template literals for fetch request replacing long and lat
+//we alredy have geolocation stroed in variable (position)
+//if position== empty then use what is inputed into boxA else use geolocation
+//store second input field e.target.value variable to use in fetch request
+//fetch request url https://api.openchargemap.io/v3/poi?maxresults=500&distance=200&includecomments=true&verbose=false&compact=true&boundingbox=(53.38997%2C%20-2.91819)%2C%20(51.36836%2C%20-0.16149)&key=267df5b8-6a34-4295-970a-3072b912f363
+//    
+async function Fetch() {
+  const response = await fetch(`https://api.openchargemap.io/v3/poi?boundingbox=(${topLeftLat}%2C%20-${topLeftLon})%2C%20(${bottomRightLat}%2C%20-${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363`);
+  // waits until the request completes...
+      const data = await response.json();
+      //popup and markers
+      data.forEach((location) => {
+        // eslint-disable-next-line
+              var marker = new mapboxgl.Marker()
+              .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
+                      .setPopup(new mapboxgl.Popup({ offset: 30 })
+                      .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
+                      .addTo(map.current);
         
-    //         })
-    //         return data;
-    //       }
-    //       Fetch()
-});
-
+                    })
+                    return data;
+                  }
+                  Fetch()
+                });
+              });
 
 //Store new coordinates that you get when a user interacts with the map
 useEffect(() => {
@@ -171,8 +156,6 @@ setLat(map.current.getCenter().lat.toFixed(4));
 setZoom(map.current.getZoom().toFixed(2));
 });
 });
-
-
 
 //toggle button on turn by turn navigation  
 useEffect(()=>{
@@ -189,9 +172,7 @@ routesummaryelement.appendChild(btn);
 }
 }})
 
-
 const toggledirections = (evt) => {
-  //console.log("hello")
   let elements = document.getElementsByClassName('mapbox-directions-instructions')
   if (elements[0]){
     if (elements[0].style.display === "none") {
@@ -201,13 +182,9 @@ const toggledirections = (evt) => {
     elements[0].style.display = "none";
     evt.target.innerHTML="show directions"
   }
-  //console.log(elements[0])
 }
 
-
 }
-
-
 
   return (
     <>
