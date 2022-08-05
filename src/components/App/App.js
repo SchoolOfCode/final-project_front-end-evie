@@ -106,13 +106,13 @@ let directions
   
       console.log(`current lon ${lon}`);
       console.log(`current lat ${lat}`);
-      var topLeftLat = (lat + 0.003758);
+      var topLeftLat = (lat + 0.051);
       console.log(`top left lat ${topLeftLat}`)
-      var topLeftLon = (lon + 0.003758);
+      var topLeftLon = (lon - 0.079);
       console.log(`top left lon ${topLeftLon}`)
-      var bottomRightLat = (lat - 0.003758);
+      var bottomRightLat = (lat - 0.054);
    console.log(`bottom right lat ${bottomRightLat}`)
-   var bottomRightLon = (lon - 0.003758);
+   var bottomRightLon = (lon + 0.054);
    console.log(`bottom right lon ${bottomRightLon}`)
   //  var boundingBox1 = (topLeftLat-topLeftLon);
   //  var boundingBox2 = (bottomRightLat-bottomRightLon);
@@ -126,9 +126,10 @@ let directions
 //if position== empty then use what is inputed into boxA else use geolocation
 //store second input field e.target.value variable to use in fetch request
 //fetch request url https://api.openchargemap.io/v3/poi?maxresults=500&distance=200&includecomments=true&verbose=false&compact=true&boundingbox=(53.38997%2C%20-2.91819)%2C%20(51.36836%2C%20-0.16149)&key=267df5b8-6a34-4295-970a-3072b912f363
-//    
+//    https://api.openchargemap.io/v3/poi?boundingbox=(52.58376948176582%2C-2.265332526763274)%2C(52.508607984280715%2C-2.132809943751942)&key=267df5b8-6a34-4295-970a-3072b912f363
 async function Fetch() {
-  const response = await fetch(`https://api.openchargemap.io/v3/poi?boundingbox=(${topLeftLat}%2C%20-${topLeftLon})%2C%20(${bottomRightLat}%2C%20-${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363`);
+  console.log(`top left lat ${topLeftLat}`)
+  const response = await fetch(`https://api.openchargemap.io/v3/poi?boundingbox=(${topLeftLat}%2C${topLeftLon})%2C(${bottomRightLat}%2C${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363`);
   // waits until the request completes...
       const data = await response.json();
       //popup and markers
