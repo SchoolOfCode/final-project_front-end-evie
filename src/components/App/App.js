@@ -56,21 +56,9 @@ let directions
                 .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
                 .addTo(map.current);
       })
-      // console.log(info)
       return info;
       }
       Fetchpolyline()
-      console.log(e);
-      // console.log(e.target._easeOptions.center[0])
-      // console.log(e.target._easeOptions.center[1])
-      // console.log(e.target._easeOptions.center.lng)
-      // console.log(e.target._easeOptions.center.lat)
-      //start point
-      // console.log(e.source.data.features[0].geometry.coordinates[0]);
-      // console.log(e.source.data.features[0].geometry.coordinates[1]);
-      // console.log(e.source.data.features[1].geometry.coordinates[0])
-      // console.log(e.source.data.features[1].geometry.coordinates[1])
-
     })
     // Add geolocate control to the map.
     map.current.addControl(
@@ -96,37 +84,17 @@ let directions
     // Set an event listener that fires
     // when a geolocate event occurs.
     geolocate.on('geolocate', function (ev) {
-      // console.log(ev.coords)
       var lon = ev.coords.longitude;
       var lat = ev.coords.latitude
       var position = [lon, lat];
-      console.log(position);
       directions.setOrigin(position)
       
-  
-      console.log(`current lon ${lon}`);
-      console.log(`current lat ${lat}`);
+      //coordinates for bounding box
       var topLeftLat = (lat + 0.051);
-      console.log(`top left lat ${topLeftLat}`)
       var topLeftLon = (lon - 0.079);
-      console.log(`top left lon ${topLeftLon}`)
       var bottomRightLat = (lat - 0.054);
-   console.log(`bottom right lat ${bottomRightLat}`)
-   var bottomRightLon = (lon + 0.054);
-   console.log(`bottom right lon ${bottomRightLon}`)
-  //  var boundingBox1 = (topLeftLat-topLeftLon);
-  //  var boundingBox2 = (bottomRightLat-bottomRightLon);
-  //  console.log(boundingBox1)
-  //  console.log(boundingBox2)
-   
-  
-//plan 
-// template literals for fetch request replacing long and lat
-//we alredy have geolocation stroed in variable (position)
-//if position== empty then use what is inputed into boxA else use geolocation
-//store second input field e.target.value variable to use in fetch request
-//fetch request url https://api.openchargemap.io/v3/poi?maxresults=500&distance=200&includecomments=true&verbose=false&compact=true&boundingbox=(53.38997%2C%20-2.91819)%2C%20(51.36836%2C%20-0.16149)&key=267df5b8-6a34-4295-970a-3072b912f363
-//    https://api.openchargemap.io/v3/poi?boundingbox=(52.58376948176582%2C-2.265332526763274)%2C(52.508607984280715%2C-2.132809943751942)&key=267df5b8-6a34-4295-970a-3072b912f363
+      var bottomRightLon = (lon + 0.054);
+
 async function Fetch() {
   console.log(`top left lat ${topLeftLat}`)
   const response = await fetch(`https://api.openchargemap.io/v3/poi?boundingbox=(${topLeftLat}%2C${topLeftLon})%2C(${bottomRightLat}%2C${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363`);
@@ -190,7 +158,6 @@ const toggledirections = (evt) => {
   return (
     <>
   <div>
-   
     <div className="sidebar">
       {/*Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}*/}
     </div>
