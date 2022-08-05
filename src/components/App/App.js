@@ -4,6 +4,7 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 import Basic from '../forms/forms'
+// import enhanceWithFormik(memo(FormModal)) from '../forms/formModal.js'
 
 mapboxgl.accessToken=process.env.REACT_APP_API_KEY;
 
@@ -151,6 +152,7 @@ const toggledirections = (evt) => {
     </div>
  </div>
  <Basic/>
+ {/* <enhanceWithFormik(memo(FormModal))/> */}
 </>
   );
 }

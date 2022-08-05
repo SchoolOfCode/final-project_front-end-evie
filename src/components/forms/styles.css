@@ -1,0 +1,14 @@
+.box {
+    padding: 0 0 15px;
+  }
+  .box label,
+  .box input {
+    margin: 0 5px 0;
+  }
+  .msg-error {
+    color: red;
+    font-weight: bold;
+  }
+  .button-modal {
+    margin: 0 10px 0;
+  }
