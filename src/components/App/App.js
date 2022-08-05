@@ -69,6 +69,25 @@ let directions
       }),
       'top-left'
       );
+//toggle button refactor
+map.current.on('idle', () => {
+  addToggleDirectionButton();
+  function addToggleDirectionButton() {
+    let routesummaryelement = document.getElementsByClassName('mapbox-directions-route-summary')[0];
+    if (routesummaryelement) {
+      let button = routesummaryelement.querySelector('.instruction-btn');
+      if (button === null) {
+        const btn = document.createElement("button");
+        btn.className = "instruction-btn";
+        btn.addEventListener("click", toggledirections);
+        btn.innerHTML = "hide directions";
+        routesummaryelement.appendChild(btn);
+        console.log('Added directions toggle button');
+      }
+    }
+  }
+}
+);
 
   const geolocate = new mapboxgl.GeolocateControl({
       positionOptions: {
@@ -97,7 +116,7 @@ let directions
 
 async function Fetch() {
   console.log(`top left lat ${topLeftLat}`)
-  const response = await fetch(`https://api.openchargemap.io/v3/poi?boundingbox=(${topLeftLat}%2C${topLeftLon})%2C(${bottomRightLat}%2C${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363`);
+  const response = await fetch(`https://api.openchargemap.io/v3/poi?&compact=true&boundingbox=(${topLeftLat}%2C${topLeftLon})%2C(${bottomRightLat}%2C${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363`);
   // waits until the request completes...
       const data = await response.json();
       //popup and markers
@@ -127,19 +146,19 @@ setZoom(map.current.getZoom().toFixed(2));
 });
 
 //toggle button on turn by turn navigation  
-useEffect(()=>{
-let routesummaryelement = document.getElementsByClassName('mapbox-directions-route-summary')[0]
-if(routesummaryelement){
-let button = routesummaryelement.querySelector('.instruction-btn')
-//console.log("hello line 71 in creating a button")
-if(button === null){
-const btn = document.createElement("button");
-btn.className = "instruction-btn";
-btn.addEventListener("click", toggledirections);
-btn.innerHTML = "hide directions";
-routesummaryelement.appendChild(btn);
-}
-}})
+// useEffect(()=>{
+// let routesummaryelement = document.getElementsByClassName('mapbox-directions-route-summary')[0]
+// if(routesummaryelement){
+// let button = routesummaryelement.querySelector('.instruction-btn')
+// //console.log("hello line 71 in creating a button")
+// if(button === null){
+// const btn = document.createElement("button");
+// btn.className = "instruction-btn";
+// btn.addEventListener("click", toggledirections);
+// btn.innerHTML = "hide directions";
+// routesummaryelement.appendChild(btn);
+// }
+// }})
 
 const toggledirections = (evt) => {
   let elements = document.getElementsByClassName('mapbox-directions-instructions')
