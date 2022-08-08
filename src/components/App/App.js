@@ -85,6 +85,9 @@ map.current.on('idle', () => {
         console.log('Added directions toggle button');
       }
     }
+    return () => {
+      // Do some cleanup   
+     }
   }
 }
 );
@@ -143,6 +146,9 @@ setLng(map.current.getCenter().lng.toFixed(4));
 setLat(map.current.getCenter().lat.toFixed(4));
 setZoom(map.current.getZoom().toFixed(2));
 });
+return () => {
+  // Do some cleanup   
+ }
 });
 
 //toggle button on turn by turn navigation  
