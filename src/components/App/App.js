@@ -32,53 +32,56 @@ function App() {
     });
 
     map.current.on("sourcedata", (e) => {
-      const path = [
-        [
-          e.source.data.features[0].geometry.coordinates[1],
-          e.source.data.features[0].geometry.coordinates[0],
-        ],
-        [
-          e.source.data.features[1].geometry.coordinates[1],
-          e.source.data.features[1].geometry.coordinates[0],
-        ],
-      ];
-      // console.log(encode(path, 5));
-      const result = encode(path, 5);
+      if (e.source.data) {
+        if (e.source.data.features.length > 1) {
+        const path = [
+          [
+            e.source.data.features[0].geometry.coordinates[1],
+            e.source.data.features[0].geometry.coordinates[0],
+          ],
+          [
+            e.source.data.features[1].geometry.coordinates[1],
+            e.source.data.features[1].geometry.coordinates[0],
+          ],
+        ];
+        // console.log(encode(path, 5));
+        const result = encode(path, 5);
+        
+        // poly line 'https://api.openchargemap.io/v3/poi?polyline=csn_I%7CpqJjsFuxJ&key=267df5b8-6a34-4295-970a-3072b912f363'
 
-      // poly line 'https://api.openchargemap.io/v3/poi?polyline=csn_I%7CpqJjsFuxJ&key=267df5b8-6a34-4295-970a-3072b912f363'
-
-      async function Fetchpolyline() {
-        const res = await fetch(
-          `https://api.openchargemap.io/v3/poi?polyline=${result}&key=267df5b8-6a34-4295-970a-3072b912f363`
-        );
-        // waits until the request completes...
-        const info = await res.json();
-        //popup and markers
-        info.forEach((location) => {
-          // eslint-disable-next-line
-          var marker = new mapboxgl.Marker()
-            .setLngLat([
-              location.AddressInfo.Longitude,
-              location.AddressInfo.Latitude,
-            ])
-            .setPopup(
-              new mapboxgl.Popup({ offset: 30 }).setHTML(
-                "<h4>" +
-                  location.AddressInfo.Title +
+        async function Fetchpolyline() {
+          const res = await fetch(
+            `https://api.openchargemap.io/v3/poi?polyline=${result}&key=267df5b8-6a34-4295-970a-3072b912f363`
+          );
+          // waits until the request completes...
+          const info = await res.json();
+          //popup and markers
+          info.forEach((location) => {
+// eslint-disable-next-line
+            var marker = new mapboxgl.Marker()
+              .setLngLat([
+                location.AddressInfo.Longitude,
+                location.AddressInfo.Latitude,
+              ])
+              .setPopup(
+                new mapboxgl.Popup({ offset: 30 }).setHTML(
                   "<h4>" +
-                  location.AddressInfo.AddressLine1 +
-                  "<h4>" +
-                  location.AddressInfo.Town +
-                  "<h4>" +
-                  location.AddressInfo.Postcode
+                    location.AddressInfo.Title +
+                    "<h4>" +
+                    location.AddressInfo.AddressLine1 +
+                    "<h4>" +
+                    location.AddressInfo.Town +
+                    "<h4>" +
+                    location.AddressInfo.Postcode
+                )
               )
-            )
-            .addTo(map.current);
-        });
-        return info;
+              .addTo(map.current);
+          });
+          return info;
+        }
+        Fetchpolyline();
       }
-      Fetchpolyline();
-    });
+  }});
     // Add geolocate control to the map.
     map.current.addControl(
       new MapboxDirections({
@@ -106,9 +109,6 @@ function App() {
             console.log("Added directions toggle button");
           }
         }
-        // return () => {
-        //   // Do some cleanup
-        // };
       }
     });
 
@@ -170,9 +170,9 @@ function App() {
       }
       Fetch();
     });
-      return () => {
-        // cleanup
-    }
+    return () => {
+      // cleanup
+    };
   });
 
   //Store new coordinates that you get when a user interacts with the map
