@@ -4,6 +4,7 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 import { encode } from "@googlemaps/polyline-codec";
+import backendData from '../../libs/backendData';
 //import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
 // import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
@@ -26,6 +27,7 @@ center: [lng, lat],
 zoom: zoom
 }
 );
+
 let directions
     //Drop down directions
     map.current.on('load', function() {
@@ -125,7 +127,7 @@ async function Fetch() {
               var marker = new mapboxgl.Marker()
               .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
                       .setPopup(new mapboxgl.Popup({ offset: 30 })
-                      .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
+                      .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>' + backendData[0].stars))
                       .addTo(map.current);
         
                     })
