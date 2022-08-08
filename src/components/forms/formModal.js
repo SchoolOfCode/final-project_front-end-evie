@@ -2,6 +2,8 @@ import React, { memo } from "react";
 import { withFormik, Form, FastField, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./styles.css";
+
+
 const Schema = Yup.object().shape({
   login: Yup.string()
     .min(2, "Too Short!")

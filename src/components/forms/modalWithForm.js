@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import Modal from "react-responsive-modal";
-import FormModal from "./form-modal";
+import FormModal from "../forms/formModal";
 import "./styles.css";
 const ModalWithForm = ({ isOpen, handleClose, refModal }) => {
   return (

@@ -2,9 +2,10 @@ import  React, { useRef, useEffect, useState } from 'react';
 import './App.css';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import 'mapbox-gl/dist/mapbox-gl.css';
-import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
-import Basic from '../forms/forms'
+import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
+import Basic from '../forms/forms';
 // import enhanceWithFormik(memo(FormModal)) from '../forms/formModal.js'
+import FormMain from "../forms/formMain";
 
 mapboxgl.accessToken=process.env.REACT_APP_API_KEY;
 
@@ -133,12 +134,11 @@ const toggledirections = (evt) => {
 
 }
 
-
+const refModal = useRef();
 
   return (
     <>
   <div>
-   
     <div className="sidebar">
       {/*Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}*/}
     </div>
@@ -151,8 +151,10 @@ const toggledirections = (evt) => {
       <img id="logoContainer" src="../blue-logo.png" alt="logo" width="70" />
     </div>
  </div>
- <Basic/>
+ {/*<Basic/>*/}
  {/* <enhanceWithFormik(memo(FormModal))/> */}
+    <div className="modal" ref={refModal} />
+      <FormMain refModal={refModal} />
 </>
   );
 }

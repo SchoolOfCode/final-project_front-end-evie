@@ -11,4 +11,23 @@
   }
   .button-modal {
     margin: 0 10px 0;
-  }
+    position: relative;
+      font-size: 12px;
+      font-family: sans-serif;
+      width: 120px;
+      height: 30px;
+      border-width: 1px;
+      color: #fff;
+      border-color: #0092C5;
+      border-top-left-radius: 28px;
+      border-top-right-radius: 28px;
+      border-bottom-left-radius: 28px;
+      border-bottom-right-radius: 28px;
+      background: #0092C5;
+    }
+    
+    .instruction-btn:hover {
+      background: #E8f6ff;
+      color: #0092C5;
+    }
+  

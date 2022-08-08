@@ -2,7 +2,7 @@ import React, { useState, memo } from "react";
 //FastField, ErrorMessage formik extra import could use after
 import { withFormik, Form, } from "formik";
 import * as Yup from "yup";
-import ModalWithForm from "./modal-with-form";
+import ModalWithForm from "../forms/modalWithForm";
 import "./styles.css";
 const Schema = Yup.object().shape({
   name: Yup.string()
