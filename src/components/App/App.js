@@ -52,10 +52,10 @@ let directions
        //popup and markers
        info.forEach((location) => {
         // eslint-disable-next-line
-        var marker = new mapboxgl.Marker()
+        var marker = new mapboxgl.Marker({ "color": "#0092c5" })
                 .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
                 .setPopup(new mapboxgl.Popup({ offset: 30 })
-                .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
+                .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode  +'<h4>' + backendData[0].FormalName +'<h4>' + backendData[0].Title +'<h4>' + backendData[0].stars))
                 .addTo(map.current);
       })
       return info;
@@ -115,21 +115,25 @@ map.current.on('idle', () => {
       var topLeftLon = (lon - 0.079);
       var bottomRightLat = (lat - 0.054);
       var bottomRightLon = (lon + 0.054);
-
+//https://api.openchargemap.io/v3/poi?boundingbox=(${topLeftLat}%2C${topLeftLon})%2C(${bottomRightLat}%2C${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363
+      //https://api.openchargemap.io/v3/poi?boundingbox=(${topLeftLat}%2C${topLeftLon})%2C(${bottomRightLat}%2C${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363
 async function Fetch() {
   console.log(`top left lat ${topLeftLat}`)
-  const response = await fetch(`https://api.openchargemap.io/v3/poi?&compact=true&boundingbox=(${topLeftLat}%2C${topLeftLon})%2C(${bottomRightLat}%2C${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363`);
+  const response = await fetch(`https://api.openchargemap.io/v3/poi?compact=true&boundingbox=(${topLeftLat}%2C${topLeftLon})%2C(${bottomRightLat}%2C${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363`);
   // waits until the request completes...
       const data = await response.json();
       //popup and markers
       data.forEach((location) => {
         // eslint-disable-next-line
-              var marker = new mapboxgl.Marker()
+              var marker = new mapboxgl.Marker({ "color": "#0092c5"})
               .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
                       .setPopup(new mapboxgl.Popup({ offset: 30 })
-                      .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>' + backendData[0].stars))
+                      .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode +'<h4>' + backendData[0].FormalName +'<h4>' + backendData[0].Title +'<h4>' + backendData[0].stars))
                       .addTo(map.current);
-        
+                      // console.log(`${location.Connections} line 133`);
+                      //  console.log(`${location.Connections[0].ConnectionType.FormalName} line 134`);
+                      //  console.log(`${location.Connections[0].ConnectionType.Title} line 135` );
+
                     })
                     return data;
                   }
