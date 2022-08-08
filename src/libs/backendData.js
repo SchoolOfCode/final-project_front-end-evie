@@ -4,6 +4,7 @@ const backendData = [
         "FormalName": "IEC 62196-3 Configuration AA",
         "Title": "CHAdeMO",
       "stars": "5",
+      "colour": "#5DFFA2",
       "comments": "Free charge, need cable type 1 to 2. Thank you !",
     },
     {
@@ -11,6 +12,7 @@ const backendData = [
         "FormalName": "IEC 62196-2 Type 2",
         "Title": "Type 2 (Socket Only)",
         "stars": "1",
+        "colour": "#FFDED1",
         "comments": "This charge point has not been working / out of order for over 9 months now. Very disappointing!",
     },
     {
@@ -18,6 +20,7 @@ const backendData = [
         "FormalName": "IEC 62196-2 Type 2",
         "Title": "Type 2 (Socket Only)",
         "stars": "1",
+        "colour": "#FD4D00",
         "comments": "Try to avoid the genie chademo 50kW point it will trip n mess up your ev sysyem your EV petrol pump is all good",
       },
       {
@@ -25,6 +28,7 @@ const backendData = [
         "FormalName": "IEC 62196-2 Type 2",
         "Title": "Type 2 (Socket Only)",
         "stars": "5",
+        "colour": "#5DFFA2",
         "comments": "Really easy to use, and charged at 45 kW for my Nissan leaf, successful charge using the app. And nice to be able to see charging progress in the app while i was away from the car.",
       },
       {
@@ -32,6 +36,7 @@ const backendData = [
         "FormalName": "IEC 62196-2 Type 2",
         "Title": "Type 2 (Socket Only)",
         "stars": "1",
+        "colour": "#FD4D00",
         "comments": "Plugged into number one. App didn't work but charger 2 worked ok with a bank card. Middle of lunch, noticed car had stopped charging.  Returned to find charger showing fault. Have changed to other charger, app still not working. First 2 cards not accepted, third time lucky.",
       },
       {
@@ -39,6 +44,7 @@ const backendData = [
         "FormalName": "IEC 62196-3 Configuration AA",
         "Title": "CHAdeMO",
         "stars": "5",
+        "colour": "#5DFFA2",
         "comments": "This was my first attempted use of InstaVolt, and it was  my first successful DC charge. Previuos chargers (2) had failed. Your charge process was so simple and easy. You have restored my faith in the concept of electric travel, thank you.",
       },
       {
@@ -46,6 +52,7 @@ const backendData = [
         "FormalName": "IEC 62196-3 Configuration AA",
         "Title": "CHAdeMO",
         "stars": "4",
+        "colour": "#B9E3FF",
         "comments": "Quick, simple, and available. Sadly, the site was very muddy and needs attention.",
       },
       {
@@ -53,6 +60,7 @@ const backendData = [
         "FormalName": "IEC 62196-2 Type 2",
         "Title": "Type 2 (Socket Only)",
         "stars": "4",
+        "colour": "#B9E3FF",
         "comments": "Only used the charge point which is not signposted but at the rear of the property as you drive out. The charger worked fine, no issues and there is a restroom within the shop",
       },
       {
@@ -60,6 +68,7 @@ const backendData = [
          "FormalName": "IEC 62196-2 Type 2",
         "Title": "Type 2 (Socket Only)",
         "stars": "5",
+        "colour": "#5DFFA2",
         "comments": "Good",
       },
       {
@@ -67,6 +76,7 @@ const backendData = [
         "FormalName": "IEC 62196-2 Type 2",
         "Title": "Type 2 (Socket Only)",
         "stars": "1",
+        "colour": "#FD4D00",
         "comments": "Several people wanting to charge cars without success. On the phone to BP for 55 minutes with constant 'please hold' instructions and little reassurance or listening. BP Chargemaster - get your customer service right please!!",
       },
       {
@@ -74,6 +84,7 @@ const backendData = [
         "FormalName": "IEC 62196-2 Type 2",
         "Title": "Type 2 (Socket Only)",
         "stars": "5",
+        "colour": "#5DFFA2",
         "comments": "Quick, easy and it worked!",
       },
       {
@@ -81,6 +92,7 @@ const backendData = [
         "FormalName": "IEC 62196-2 Type 2",
         "Title": "Type 2 (Socket Only)",
         "stars": "5",
+        "colour": "#5DFFA2",
         "comments": "First Rate charging Station",
       },
       {
@@ -88,6 +100,7 @@ const backendData = [
         "FormalName": "IEC 62196-2 Type 2",
         "Title": "Type 2 (Socket Only)",
         "stars": "2",
+        "colour": "#FFE0B2",
         "comments": "long queue at the charging point and no others in the area",
       },
      {
@@ -95,6 +108,7 @@ const backendData = [
          "FormalName": "IEC 62196-3 Configuration AA",
          "Title": "CHAdeMO",
         "stars": "4",
+        "colour": "#B9E3FF",
         "comments": "brillant service",
       },
     { 
@@ -102,6 +116,7 @@ const backendData = [
         "FormalName": "IEC 62196-2 Type 2",
         "Title": "Type 2 (Socket Only)",
         "stars": "2",
+        "colour": "#FFE0B2",
         "comments": "The parking area is a bit tight, but with all the bells and whistles on the Tesla it is definitely manageable",
       },
       {
@@ -109,6 +124,7 @@ const backendData = [
         "FormalName": "IEC 62196-2 Type 2",
         "Title": "Type 2 (Socket Only)",
         "stars": "5",
+        "colour": "#5DFFA2",
         "comments": "Great charger! Not crowded. Walking distance to a larger gas station store with clean bathrooms.",
       },
      {
@@ -116,6 +132,7 @@ const backendData = [
         "FormalName": "IEC 62196-3 Configuration AA",
         "Title": "CHAdeMO",
         "stars": "4",
+        "colour": "#B9E3FF",
         "comments": "Great charger! Super fast speeds.",
       }
 ]
