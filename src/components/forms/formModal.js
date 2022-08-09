@@ -3,32 +3,30 @@ import { withFormik, Form, FastField, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./styles.css";
 
-
 const Schema = Yup.object().shape({
-  login: Yup.string()
-    .min(2, "Too Short!")
-    .required("Required Login!"),
-  password: Yup.string()
-    .min(6, "Too Short!")
-    .required("Required Password!")
+  review: Yup.string().min(5, "Too Short!"),
+  //password: Yup.string().min(6, "Too Short!").required("Required Password!"),
 });
 const FormModal = () => {
   return (
     <Form>
       <div className="box">
-        <label htmlFor="login">Login:</label>
-        <FastField name="login" placeholder="login" />
+        <label htmlFor="Review Section">Review Section</label>
+        <FastField
+          className="textarea"
+          name="review-section"
+          placeholder="please type review here"
+        />
+        <FastField
+          className="textarea"
+          name="review-section"
+          placeholder="please type review here"
+        />
         <span className="msg-error">
-          <ErrorMessage name="login" />
+          <ErrorMessage name="review" />
         </span>
       </div>
-      <div className="box">
-        <label htmlFor="password">Password:</label>
-        <FastField name="password" type="password" />
-        <span className="msg-error">
-          <ErrorMessage name="password" />
-        </span>
-      </div>
+
       <button className="button" type="submit">
         Send
       </button>
@@ -36,10 +34,10 @@ const FormModal = () => {
   );
 };
 const enhanceWithFormik = withFormik({
-  mapPropsToValues: () => ({ login: "", password: "" }),
+  mapPropsToValues: () => ({ review: "" }),
   validationSchema: Schema,
-  handleSubmit: values => {
+  handleSubmit: (values) => {
     console.log(values);
-  }
+  },
 });
 export default enhanceWithFormik(memo(FormModal));

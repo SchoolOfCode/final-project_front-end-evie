@@ -1,16 +1,14 @@
 import React, { useState, memo } from "react";
 //FastField, ErrorMessage formik extra import could use after
-import { withFormik, Form, } from "formik";
+import { withFormik, Form } from "formik";
 import * as Yup from "yup";
 import ModalWithForm from "../forms/modalWithForm";
 import "./styles.css";
+
+//This is the blue modal button
 const Schema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, "Too Short!")
-    .required("Required Name!"),
-  email: Yup.string()
-    .email("Invalid email Email!")
-    .required("Required")
+  name: Yup.string().min(2, "Too Short!").required("Required Name!"),
+  email: Yup.string().email("Invalid email Email!").required("Required"),
 });
 const FormMain = ({ refModal }) => {
   const [open, setOpen] = useState(false);
@@ -26,15 +24,15 @@ const FormMain = ({ refModal }) => {
         type="button"
         onClick={() => setOpen(true)}
       >
-        Modal
+        Review this Charger
       </button>
     </Form>
   );
 };
 const enhanceWithFormik = withFormik({
   validationSchema: Schema,
-  handleSubmit: values => {
+  handleSubmit: (values) => {
     console.log(values);
-  }
+  },
 });
 export default enhanceWithFormik(memo(FormMain));

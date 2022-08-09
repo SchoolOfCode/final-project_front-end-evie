@@ -1,19 +1,23 @@
-import React from 'react';
-import { Formik } from 'formik';
+import React from "react";
+import { Formik } from "formik";
+import "./styles.css";
+
+//The Gist - formik keeps track ofyour form's state and then exposes it plus a few re-useable methods and handlers.
+// Don't think we need this???
 
 const Basic = () => (
   <div>
     <h1>Anywhere in your app!</h1>
     <Formik
-      initialValues={{ email: '', password: '' }}
-      validate={values => {
+      initialValues={{ review: "" }}
+      validate={(values) => {
         const errors = {};
-        if (!values.email) {
-          errors.email = 'Required';
+        if (!values.review) {
+          errors.review = "Required";
         } else if (
-          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.review)
         ) {
-          errors.email = 'Invalid email address';
+          errors.review = "not enough characters";
         }
         return errors;
       }}
@@ -36,21 +40,21 @@ const Basic = () => (
       }) => (
         <form onSubmit={handleSubmit}>
           <input
-            type="email"
-            name="email"
+            type="review"
+            name="review"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.email}
           />
-          {errors.email && touched.email && errors.email}
+          {errors.review && touched.review && errors.review}
           <input
-            type="password"
-            name="password"
+            type="review"
+            name="review"
             onChange={handleChange}
             onBlur={handleBlur}
-            value={values.password}
+            value={values.review}
           />
-          {errors.password && touched.password && errors.password}
+          {errors.review && touched.review && errors.review}
           <button type="submit" disabled={isSubmitting}>
             Submit
           </button>
