@@ -63,6 +63,11 @@ function App() {
       directions.setOrigin(position);
     });
 
+    /*handleClick = () => {
+      console.log("hello");
+      alert("hello");
+    };*/
+
     async function Fetch() {
       const response = await fetch(
         "https://api.openchargemap.io/v3/poi?maxresults=500&distance=200&includecomments=true&verbose=false&compact=true&boundingbox=(53.38997%2C%20-2.91819)%2C%20(51.36836%2C%20-0.16149)&key=267df5b8-6a34-4295-970a-3072b912f363"
@@ -72,6 +77,7 @@ function App() {
       //popup and markers
       data.forEach((location) => {
         // eslint-disable-next-line
+
         var marker = new mapboxgl.Marker()
           .setLngLat([
             location.AddressInfo.Longitude,
@@ -86,10 +92,14 @@ function App() {
                 "<h4>" +
                 location.AddressInfo.Town +
                 "<h4>" +
-                location.AddressInfo.Postcode
+                location.AddressInfo.Postcode +
+                "<h4>" +
+                `<button class="btn">review this charger</button>`
             )
           )
           .addTo(map.current);
+        //const btn = document.getElementsByClassName("btn")[0];
+        //btn.addEventListener("click", handleClick);
       });
       return data;
     }

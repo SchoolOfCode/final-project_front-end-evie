@@ -10,8 +10,8 @@ const Schema = Yup.object().shape({
 const FormModal = () => {
   return (
     <Form>
+      <label htmlFor="Review Section">Review Section</label>
       <div className="box">
-        <label htmlFor="Review Section">Review Section</label>
         <FastField
           className="textarea"
           name="review-section"
@@ -20,7 +20,7 @@ const FormModal = () => {
         <FastField
           className="textarea"
           name="review-section"
-          placeholder="please type review here"
+          placeholder="a box for something else"
         />
         <span className="msg-error">
           <ErrorMessage name="review" />
