@@ -1,11 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./App.css";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import "mapbox-gl/dist/mapbox-gl.css";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
-import Basic from "../forms/forms";
-// import enhanceWithFormik(memo(FormModal)) from '../forms/formModal.js'
-import FormMain from "../forms/FormMain";
+import Feedback from "../Feedback/feedback.js"
+// import Basic from "../forms/forms";
+// import FormMain from "../forms/formMain";
 
 mapboxgl.accessToken = process.env.REACT_APP_API_KEY;
 
@@ -153,6 +154,15 @@ function App() {
 
   return (
     <>
+     <nav
+        style={{
+          borderBottom: "solid 1px",
+          paddingBottom: "1rem",
+        }}
+      >
+        <Link to="/">Map</Link> |{" "}
+        <Link to="/Feedback">Feedback</Link> 
+      </nav>
       <div>
         <div className="sidebar">
           {/*Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}*/}
@@ -172,8 +182,8 @@ function App() {
       </div>
       {/*<Basic/>*/}
       {/* <enhanceWithFormik(memo(FormModal))/> */}
-      <div className="modal" ref={refModal} />
-      <FormMain refModal={refModal} />
+      {/* <div className="modal" ref={refModal} /> */}
+      {/* <FormMain refModal={refModal} /> */}
     </>
   );
 }
