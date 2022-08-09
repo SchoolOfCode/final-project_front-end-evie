@@ -13,7 +13,7 @@ https://ev-ie.netlify.app
 
 - **Client:** 
 ```
-ReactJS, PWA, Sass, Auth0, Cypress, Netlify
+ReactJS, Netlify
 ```
 
 - **Server:** 
