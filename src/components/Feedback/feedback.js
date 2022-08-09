@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 //import "./App.css";
 import { FaStar } from "react-icons/fa";
@@ -19,6 +20,39 @@ function Feedback() {
   const handleMouseLeave = () => {
     setHoverValue(undefined);
   };
+  const [formValue, setFormValue] = useState({     
+  title: "",
+  model: "",
+  socket: "",
+  review: "",
+});
+const onSubmit = (e) => {
+  e.preventDefault();
+  setFormValue({
+    title: e.target[0].value,
+    model: e.target[1].value,
+    socket: e.target[2].value,
+    review: e.target[3].value,
+   
+  });
+  axios
+  .post("http://localhost:3000/Feedback", {
+
+      star: hoverValue,
+      title: formValue.title,
+      description: formValue.description,
+      video: formValue.video,
+      codesyntax: formValue.codesyntax,
+      docs: formValue.docs,
+    })
+    .then((response) => {
+      console.log(response);
+    });
+};
+console.log(formValue)
+console.log(hoverValue)
+
+
   return (
    <>
     <nav
@@ -30,6 +64,7 @@ function Feedback() {
         <Link to="/">Map</Link> |{" "}
         <Link to="/Feedback">Feedback</Link> 
       </nav>
+      <form onSubmit={onSubmit} id="submit-form">
     <div style={styles.container}>
       <h2> React Ratings </h2>
       <div style={styles.stars}>
@@ -54,10 +89,17 @@ function Feedback() {
           );
         })}
       </div>
-      <textarea placeholder="What's your experience?" style={styles.textarea} />
-      <textarea placeholder="Charge Type" style={styles.textarea} />
-      <button style={styles.button}>Submit</button>
+      Charge point:
+      <textarea placeholder="Charge point" style={styles.textarea} />
+      Model of charger:
+      <textarea placeholder="Model of charger" style={styles.textarea} />
+      Socket type:
+      <textarea placeholder="Socket type" style={styles.textarea} />
+      Leave your review:
+      <textarea placeholder="Review" style={styles.textarea} />
+      <input id="submit-button" type="submit" value="Submit Review" style={styles.button}/>
     </div>
+    </form>
     </>
   );
 }
