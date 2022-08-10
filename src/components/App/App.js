@@ -4,7 +4,7 @@ import "./App.css";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import "mapbox-gl/dist/mapbox-gl.css";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
-import Feedback from "../Feedback/feedback.js"
+// import Feedback from "../Feedback/feedback.js"
 import { encode, decode } from "@googlemaps/polyline-codec";
 
 mapboxgl.accessToken = process.env.REACT_APP_API_KEY;
