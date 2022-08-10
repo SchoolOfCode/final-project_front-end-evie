@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
@@ -8,6 +9,7 @@ import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
 import { encode, decode } from "@googlemaps/polyline-codec";
 
 mapboxgl.accessToken = process.env.REACT_APP_API_KEY;
+
 
 function App() {
   // const refModal = useRef();
@@ -24,7 +26,7 @@ function App() {
     return random;
   };
   randomNumber();
-  
+
   //'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84'
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -42,7 +44,7 @@ zoom: zoom
        let directions = new MapboxDirections({
       })
     // });
-      
+
     var result
     directions.on("route", direction => {
         var originCoordsLong = directions.getOrigin().geometry.coordinates[0];
@@ -63,7 +65,7 @@ zoom: zoom
 
       const encoded = "_qs_ItejLzrI{qv@";
 console.log(decode(encoded, 5));
-    
+
       // console.log(e);
 
   // poly line 'https://api.openchargemap.io/v3/poi?polyline=csn_I%7CpqJjsFuxJ&key=267df5b8-6a34-4295-970a-3072b912f363'
@@ -81,6 +83,7 @@ console.log(decode(encoded, 5));
         .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
         .setPopup(new mapboxgl.Popup({ offset: 30 })
         .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
+
                 .addTo(map.current);
       })
       return info;
@@ -122,6 +125,8 @@ map.current.on('idle', () => {
 }
 );
 
+
+
   const geolocate = new mapboxgl.GeolocateControl({
       positionOptions: {
         enableHighAccuracy: true,
@@ -161,7 +166,7 @@ async function Fetch() {
               var marker = new mapboxgl.Marker({ "color": backendData[random].colour })
               .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
                       .setPopup(new mapboxgl.Popup({ offset: 30 })
-                      .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
+                      .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode ))
                       .addTo(map.current);
                       // console.log(`${location.Connections} line 133`);
                       //  console.log(`${location.Connections[0].ConnectionType.FormalName} line 134`);
