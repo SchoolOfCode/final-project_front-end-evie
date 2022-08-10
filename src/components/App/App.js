@@ -17,13 +17,8 @@ function App() {
   const [lat, setLat] = useState(52.489471);
   const [zoom, setZoom] = useState(13);
 
-  var random
-  //generate random number
-  var randomNumber = () => {
-    random = Math.floor(Math.random() * 18);
-    return random;
-  };
-  randomNumber();
+
+  
   
   //'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84'
   useEffect(() => {
@@ -74,20 +69,28 @@ console.log(decode(encoded, 5));
         // waits until the request completes...
         const info = await res.json();
        //popup and markers
+
+        const reviews = await fetch(`http://localhost:3001/feedback`);
+        const data = await reviews.json();
+        console.log(data);
+        console.log(data.data[0].title);
+      
+     
    
        info.forEach((location) => {
         // eslint-disable-next-line
         var marker = new mapboxgl.Marker()
         .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
         .setPopup(new mapboxgl.Popup({ offset: 30 })
-        .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
-                .addTo(map.current);
+        .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>' + data.data[0].review))
+        .addTo(map.current);
+              
       })
       return info;
       }
       Fetchpolyline()
-  
     });
+
     // Add geolocate control to the map.
       map.current.addControl(
       new MapboxDirections({
