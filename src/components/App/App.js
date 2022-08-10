@@ -80,7 +80,7 @@ console.log(decode(encoded, 5));
         var marker = new mapboxgl.Marker()
         .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
         .setPopup(new mapboxgl.Popup({ offset: 30 })
-        .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode  +'<h4>' + backendData[0].FormalName +'<h4>' + backendData[0].Title +'<h4>' + backendData[0].stars))
+        .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
                 .addTo(map.current);
       })
       return info;
@@ -161,7 +161,7 @@ async function Fetch() {
               var marker = new mapboxgl.Marker({ "color": backendData[random].colour })
               .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
                       .setPopup(new mapboxgl.Popup({ offset: 30 })
-                      .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode +'<h4>' + backendData[random].FormalName +'<h4>' + backendData[random].Title +'<h4>' + backendData[random].stars))
+                      .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
                       .addTo(map.current);
                       // console.log(`${location.Connections} line 133`);
                       //  console.log(`${location.Connections[0].ConnectionType.FormalName} line 134`);
