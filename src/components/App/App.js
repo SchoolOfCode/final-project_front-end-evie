@@ -158,7 +158,7 @@ async function Fetch() {
       //popup and markers
       data.forEach((location) => {
         // eslint-disable-next-line
-              var marker = new mapboxgl.Marker({ "color": backendData[random].colour })
+              var marker = new mapboxgl.Marker()
               .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
                       .setPopup(new mapboxgl.Popup({ offset: 30 })
                       .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
