@@ -10,7 +10,7 @@ import { encode, decode } from "@googlemaps/polyline-codec";
 mapboxgl.accessToken = process.env.REACT_APP_API_KEY;
 
 function App() {
-  const refModal = useRef();
+  // const refModal = useRef();
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lng, setLng] = useState(-1.898575);
