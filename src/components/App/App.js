@@ -73,6 +73,7 @@ function App() {
       const response = await fetch(
         "https://api.openchargemap.io/v3/poi?maxresults=500&distance=200&includecomments=true&verbose=false&compact=true&boundingbox=(53.38997%2C%20-2.91819)%2C%20(51.36836%2C%20-0.16149)&key=267df5b8-6a34-4295-970a-3072b912f363"
       );
+
       // waits until the request completes...
       const data = await response.json();
       //popup and markers
@@ -94,8 +95,8 @@ function App() {
                 location.AddressInfo.Town +
                 "<h4>" +
                 location.AddressInfo.Postcode +
-                "<h4>" +
-                `<button class="btn">review this charger</button>`
+                "<h4>"
+                // `<button class="btn" onClick=${() => console.log('hello')}>review this charger</button>`
             )
           )
           .addTo(map.current);

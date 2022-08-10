@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 //import "./App.css";
@@ -22,34 +22,47 @@ function Feedback() {
   };
   const [formValue, setFormValue] = useState({     
   title: "",
-  model: "",
+  models: "",
   socket: "",
   review: "",
 });
-const onSubmit = (e) => {
-  e.preventDefault();
-  setFormValue({
-    title: e.target[0].value,
-    model: e.target[1].value,
-    socket: e.target[2].value,
-    review: e.target[3].value,
-   
-  });
+console.log(formValue);
+
+useEffect(() => {
   axios
   .post("http://localhost:3001/Feedback", {
 
-      star: hoverValue,
+      // stars: hoverValue,
       title: formValue.title,
-      model: formValue.model,
+      models: formValue.models,
       socket: formValue.socket,
       review: formValue.review,
     })
     .then((response) => {
       console.log(response);
     });
-};
-console.log(formValue)
-console.log(hoverValue)
+}, [formValue]
+)
+
+const onSubmit = (e) => {
+  e.preventDefault();
+  setFormValue({
+    title: e.target[0].value,
+    models: e.target[1].value,
+    socket: e.target[2].value,
+    review: e.target[3].value,
+   
+  });
+  
+}
+
+console.log(`${formValue} line 53 formValue`)
+console.log(`${formValue[0]} line 53 formValue]`)
+console.log(`${formValue.title} title`)
+console.log(`${formValue.models} models`)
+console.log(`${formValue.socket} socket`)
+console.log(`${formValue.review} review`)
+console.log(`${hoverValue} hover value star`)
 
 
   return (
