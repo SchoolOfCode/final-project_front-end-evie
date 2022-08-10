@@ -5,7 +5,7 @@ import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-load
 import "mapbox-gl/dist/mapbox-gl.css";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 import Feedback from "../Feedback/feedback.js"
-import { encode, decode } from "@googlemaps/polyline-codec";
+import { encode } from "@googlemaps/polyline-codec";
 
 mapboxgl.accessToken = process.env.REACT_APP_API_KEY;
 
@@ -17,13 +17,14 @@ function App() {
   const [lat, setLat] = useState(52.489471);
   const [zoom, setZoom] = useState(13);
 
-  var random
-  //generate random number
-  var randomNumber = () => {
-    random = Math.floor(Math.random() * 18);
-    return random;
-  };
-  randomNumber();
+
+  async function Test() {
+    const reviews = await fetch(`http://localhost:3001/Feedback`);
+        const data = await reviews.json();
+        console.log('hi')
+        console.log(data);
+  }
+  Test()
   
   //'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84'
   useEffect(() => {
@@ -61,20 +62,20 @@ zoom: zoom
        result = encode(path, 5);
       console.log(result);
 
-      const encoded = "_qs_ItejLzrI{qv@";
-console.log(decode(encoded, 5));
-    
       // console.log(e);
 
   // poly line 'https://api.openchargemap.io/v3/poi?polyline=csn_I%7CpqJjsFuxJ&key=267df5b8-6a34-4295-970a-3072b912f363'
 
+
+   
       async function Fetchpolyline() {
      
         const res = await fetch(`https://api.openchargemap.io/v3/poi?polyline=${result}&key=267df5b8-6a34-4295-970a-3072b912f363`);
         // waits until the request completes...
         const info = await res.json();
        //popup and markers
-   
+
+  
        info.forEach((location) => {
         // eslint-disable-next-line
         var marker = new mapboxgl.Marker()
@@ -158,15 +159,11 @@ async function Fetch() {
       //popup and markers
       data.forEach((location) => {
         // eslint-disable-next-line
-              var marker = new mapboxgl.Marker({ "color": backendData[random].colour })
+              var marker = new mapboxgl.Marker()
               .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
                       .setPopup(new mapboxgl.Popup({ offset: 30 })
                       .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
                       .addTo(map.current);
-                      // console.log(`${location.Connections} line 133`);
-                      //  console.log(`${location.Connections[0].ConnectionType.FormalName} line 134`);
-                      //  console.log(`${location.Connections[0].ConnectionType.Title} line 135` );
-
                     })
                     return data;
                   }
