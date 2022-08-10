@@ -41,20 +41,20 @@ zoom: zoom
     var result
     directions.on("route", direction => {
         var originCoordsLong = directions.getOrigin().geometry.coordinates[0];
-      console.log(originCoordsLong);
+      // console.log(originCoordsLong);
         var originCoordsLat = directions.getOrigin().geometry.coordinates[1];
-      console.log(originCoordsLat);
+      // console.log(originCoordsLat);
         var destinationCoordsLong =  directions.getDestination().geometry.coordinates[0];
-      console.log(destinationCoordsLong)
+      // console.log(destinationCoordsLong)
         var destinationCoordsLat = directions.getDestination().geometry.coordinates[1];
-      console.log(destinationCoordsLat);
+      // console.log(destinationCoordsLat);
       const path = [
        [originCoordsLat,originCoordsLong],
         [destinationCoordsLat,destinationCoordsLong]
        ];
         console.log(encode(path, 5));
        result = encode(path, 5);
-      console.log(result);
+      // console.log(result);
 
       const encoded = "_qs_ItejLzrI{qv@";
 console.log(decode(encoded, 5));
@@ -72,19 +72,32 @@ console.log(decode(encoded, 5));
 
         const reviews = await fetch(`http://localhost:3001/feedback`);
         const data = await reviews.json();
-        console.log(data);
-        console.log(data.data[0].title);
+        const data2 =  data.data;
+        console.log(data2);
+        console.log(data2[0].title);
       
      
-   
+        const matchingItem = [];
        info.forEach((location) => {
-        // eslint-disable-next-line
-        var marker = new mapboxgl.Marker()
-        .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
-        .setPopup(new mapboxgl.Popup({ offset: 30 })
-        .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>' + data.data[0].review))
-        .addTo(map.current);
-              
+         data2.forEach(review => {
+        if (location.AddressInfo.Title === review.title) {
+          matchingItem.push(review.review)
+          var marker = new mapboxgl.Marker()
+          .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
+          .setPopup(new mapboxgl.Popup({ offset: 30 })
+          .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>' + matchingItem[0]))
+          .addTo(map.current);
+          console.log(matchingItem);
+        }  else {
+          // eslint-disable-next-line
+          var marker = new mapboxgl.Marker()
+          .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
+          .setPopup(new mapboxgl.Popup({ offset: 30 })
+          .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>'))
+          .addTo(map.current);
+        }   
+        })
+        
       })
       return info;
       }
