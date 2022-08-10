@@ -1,22 +1,21 @@
-import  React, { useRef, useEffect, useState } from 'react';
-import './App.css';
-import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-import 'mapbox-gl/dist/mapbox-gl.css';
-import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
+import React, { useRef, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "./App.css";
+import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
+import "mapbox-gl/dist/mapbox-gl.css";
+import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
+import Feedback from "../Feedback/feedback.js"
 import { encode, decode } from "@googlemaps/polyline-codec";
-import backendData from '../../libs/backendData';
-//import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
-// import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
-mapboxgl.accessToken=process.env.REACT_APP_API_KEY;
-
+mapboxgl.accessToken = process.env.REACT_APP_API_KEY;
 
 function App() {
+  const refModal = useRef();
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lng, setLng] = useState(-1.898575);
   const [lat, setLat] = useState(52.489471);
-  const [zoom, setZoom] = useState(8);
+  const [zoom, setZoom] = useState(13);
 
   var random
   //generate random number
@@ -25,7 +24,7 @@ function App() {
     return random;
   };
   randomNumber();
-    
+  
   //'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84'
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -43,8 +42,7 @@ zoom: zoom
        let directions = new MapboxDirections({
       })
     // });
-     
-   
+      
     var result
     directions.on("route", direction => {
         var originCoordsLong = directions.getOrigin().geometry.coordinates[0];
@@ -65,7 +63,6 @@ zoom: zoom
 
       const encoded = "_qs_ItejLzrI{qv@";
 console.log(decode(encoded, 5));
-
     
       // console.log(e);
 
@@ -125,25 +122,25 @@ map.current.on('idle', () => {
 }
 );
 
-
-
   const geolocate = new mapboxgl.GeolocateControl({
       positionOptions: {
-        enableHighAccuracy: true
+        enableHighAccuracy: true,
       },
       // When active the map will receive updates to the device's location as it changes.
       trackUserLocation: true,
       // Draw an arrow next to the location dot to indicate which direction the device is heading.
-      showUserHeading: true
-    })
-    
+      showUserHeading: true,
+    });
+
     map.current.addControl(geolocate);
     // Set an event listener that fires
     // when a geolocate event occurs.
+
     geolocate.on('geolocate', function (ev) {
       var lon = ev.coords.longitude;
-      var lat = ev.coords.latitude
+      var lat = ev.coords.latitude;
       var position = [lon, lat];
+
       directions.setOrigin(position)
       
       //coordinates for bounding box
@@ -190,37 +187,37 @@ return () => {
  }
 });
 
-//toggle button on turn by turn navigation  
-// useEffect(()=>{
-// let routesummaryelement = document.getElementsByClassName('mapbox-directions-route-summary')[0]
-// if(routesummaryelement){
-// let button = routesummaryelement.querySelector('.instruction-btn')
-// //console.log("hello line 71 in creating a button")
-// if(button === null){
-// const btn = document.createElement("button");
-// btn.className = "instruction-btn";
-// btn.addEventListener("click", toggledirections);
-// btn.innerHTML = "hide directions";
-// routesummaryelement.appendChild(btn);
-// }
-// }})
 
-const toggledirections = (evt) => {
-  let elements = document.getElementsByClassName('mapbox-directions-instructions')
-  if (elements[0]){
-    if (elements[0].style.display === "none") {
-      evt.target.innerHTML="hide directions"
-    elements[0].style.display = "block";
-  } else {
-    elements[0].style.display = "none";
-    evt.target.innerHTML="show directions"
-  }
-}
 
-}
+//toggle button on turn by turn navigation
+  const toggledirections = (evt) => {
+    //console.log("hello")
+    let elements = document.getElementsByClassName(
+      "mapbox-directions-instructions"
+    );
+    if (elements[0]) {
+      if (elements[0].style.display === "none") {
+        evt.target.innerHTML = "hide directions";
+        elements[0].style.display = "block";
+      } else {
+        elements[0].style.display = "none";
+        evt.target.innerHTML = "show directions";
+      }
+      //console.log(elements[0])
+    }
+  };
 
   return (
     <>
+    <nav
+        style={{
+          borderBottom: "solid 1px",
+          paddingBottom: "1rem",
+        }}
+      >
+        <Link to="/">Map</Link> |{" "}
+        <Link to="/Feedback">Feedback</Link> 
+      </nav>
   <div>
     <div className="sidebar">
       {/*Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}*/}
