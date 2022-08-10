@@ -36,14 +36,13 @@ const onSubmit = (e) => {
    
   });
   axios
-  .post("http://localhost:3000/Feedback", {
+  .post("http://localhost:3001/Feedback", {
 
       star: hoverValue,
       title: formValue.title,
-      description: formValue.description,
-      video: formValue.video,
-      codesyntax: formValue.codesyntax,
-      docs: formValue.docs,
+      model: formValue.model,
+      socket: formValue.socket,
+      review: formValue.review,
     })
     .then((response) => {
       console.log(response);
