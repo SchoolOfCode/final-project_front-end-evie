@@ -20,7 +20,7 @@ function Feedback() {
   const handleMouseLeave = () => {
     setHoverValue(undefined);
   };
-  const [formValue, setFormValue] = useState({     
+  const [formValue, setFormValue] = useState({       
   title: "",
   models: "",
   socket: "",
@@ -32,16 +32,16 @@ useEffect(() => {
   axios
   .post("http://localhost:3001/Feedback", {
 
-      // stars: hoverValue,
-      title: formValue.title,
-      models: formValue.models,
-      socket: formValue.socket,
-      review: formValue.review,
+    title: formValue.title,
+    models: formValue.models,
+    socket: formValue.socket,
+    review: formValue.review,
+    stars: hoverValue,
     })
     .then((response) => {
       console.log(response);
     });
-}, [formValue]
+}, [formValue,hoverValue]
 )
 
 const onSubmit = (e) => {
