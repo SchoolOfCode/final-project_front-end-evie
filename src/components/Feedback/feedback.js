@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./feedback.css";
 import { FaStar } from "react-icons/fa";
+
 const colors = {
   cerulean: "#0092c5",
   grey: "#A9A9A9",
@@ -63,7 +64,7 @@ function Feedback() {
   return (
     <>
       <nav
-        className="navigation"
+
         style={{
           borderBottom: "solid 1px",
           paddingBottom: "0.5rem",
@@ -85,11 +86,14 @@ function Feedback() {
           <h2> Star rate this charge point</h2>
           <div style={styles.stars}>
             <br />
+
             {stars.map((_, index) => {
               return (
                 <FaStar
                   key={index}
+
                   size={28}
+
                   onClick={() => handleClick(index + 1)}
                   onMouseOver={() => handleMouseOver(index + 1)}
                   onMouseLeave={handleMouseLeave}
@@ -124,6 +128,7 @@ function Feedback() {
             id="submit-button"
             type="submit"
             value="Submit Review"
+
           />
         </div>
       </form>

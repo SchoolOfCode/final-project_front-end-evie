@@ -18,7 +18,9 @@ code {
 }
 
 .sidebar {
-  background-color: rgba(243, 244, 246, 0.1);
+  display:none;
+  background-color: rgba(229, 231, 234, 0.909);
+
   color: #fff;
   padding: 6px 12px;
   font-family: monospace;
