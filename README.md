@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/74318481/184169309-e7c26419-67d3-48f9-b4c5-9fdccb8e9e6e.jpg" height="200" width="230">
+<img src="https://user-images.githubusercontent.com/74318481/184169309-e7c26419-67d3-48f9-b4c5-9fdccb8e9e6e.jpg" height="200" width="250">
 
 # EVie
 
