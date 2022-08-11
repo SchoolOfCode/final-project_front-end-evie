@@ -74,6 +74,7 @@ console.log(decode(encoded, 5));
         const data = await reviews.json();
         const data2 =  data.data;
          console.log(info);
+
         // console.log(data2[0].title);
       
         /*PLAN
@@ -93,10 +94,10 @@ console.log(decode(encoded, 5));
           // console.log('working on 92')
           // matchingItem.push(review.review)
            //eslint-disable-next-line
-          var marker = new mapboxgl.Marker((review.stars === 5 ? {color:"#008000"} : (review.stars===4 ? {color:"#c7ff33"} : (review.stars===3 ? {color:"#ffac33"} : (review.stars===2 ? {color:"#ff6433"} : (review.stars===1 ? {color:"#ff0000"} : {color:"ffffff"}))))))
+          var marker = new mapboxgl.Marker((review.stars === 5 ? {color:"#008217"} : (review.stars===4 ? {color:"#5dffa2"} : (review.stars===3 ? {color:"#ffe53e"} : (review.stars===2 ? {color:"#fd4d00"} : (review.stars===1 ? {color:"#e0002b"} : {color:"#0092c5"}))))))
           .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
           .setPopup(new mapboxgl.Popup({ offset: 30 })
-          .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>' + review.title + '<h4>' + review.review))
+          .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>' + review.title + '<h4>' + review.review + '<h4>Star Rating:</h4>' + review.stars))
           .addTo(map.current);
           // console.log(review.title);
           // console.log(review.review);
@@ -190,19 +191,30 @@ async function Fetch() {
   const response = await fetch(`https://api.openchargemap.io/v3/poi?compact=true&boundingbox=(${topLeftLat}%2C${topLeftLon})%2C(${bottomRightLat}%2C${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363`);
   // waits until the request completes...
       const data = await response.json();
+
+
+      const allReviewsData = await fetch(`http://localhost:3001/feedback`);
+        const reviewsData = await allReviewsData.json();
+        const reviews =  reviewsData.data;
+         console.log(reviews);
       //popup and markers
       data.forEach((location) => {
+        reviews.forEach(review => {
+          //now only shows nearby markers if they have reviews (to see all just comment out lines 204 and 215)
+          if (location.AddressInfo.Title === review.title) {
+         console.log(`${location.AddressInfo.Title}`)
         // eslint-disable-next-line
-              var marker2 = new mapboxgl.Marker()
+              var marker2 = new mapboxgl.Marker((review.stars === 5 ? {color:"#008217"} : (review.stars===4 ? {color:"#5dffa2"} : (review.stars===3 ? {color:"#ffe53e"} : (review.stars===2 ? {color:"#fd4d00"} : (review.stars===1 ? {color:"#e0002b"} : {color:"#0092c5"}))))))
               .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
                       .setPopup(new mapboxgl.Popup({ offset: 30 })
-                      .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
+                      .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>' + review.title + '<h4>' + review.review + '<h4>Star Rating:</h4>' + review.stars))
                       .addTo(map.current);
                       // console.log(`${location.Connections} line 133`);
                       //  console.log(`${location.Connections[0].ConnectionType.FormalName} line 134`);
                       //  console.log(`${location.Connections[0].ConnectionType.Title} line 135` );
-
+          }
                     })
+                  })
                     return data;
                   }
                   Fetch()
