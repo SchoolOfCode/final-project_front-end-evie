@@ -108,16 +108,16 @@ function Feedback() {
           </div>
           <br />
           Charge point:
-          <textarea placeholder="Charge point" className="textarea" />
+          <textarea placeholder="" className="textarea" />
           <br />
           Model of charger:
-          <textarea placeholder="Model of charger" className="textarea" />
+          <textarea placeholder="" className="textarea" />
           <br />
           Socket type:
-          <textarea placeholder="Socket type" className="textarea" />
+          <textarea placeholder="" className="textarea" />
           <br />
           Leave your review:
-          <textarea placeholder="Leave your review" className="textarea" />
+          <textarea placeholder="" className="textarea" />
           <br />
           <input
             className="submit-button"
