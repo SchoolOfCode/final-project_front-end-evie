@@ -1,5 +1,10 @@
 # EVie
-Welcome to EVie - 
+
+As our final project team project at the School of Code, we decided to build an app for electric vehicle users. 
+
+The name of the app is called **EVie**.
+
+
 
 # The Problem
 
