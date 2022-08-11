@@ -82,14 +82,14 @@ function Feedback() {
       </nav>
       <form onSubmit={onSubmit} id="submit-form">
         <div style={styles.container}>
-          <h2> Rate this charge point</h2>
+          <h2> Star rate this charge point</h2>
           <div style={styles.stars}>
             <br />
             {stars.map((_, index) => {
               return (
                 <FaStar
                   key={index}
-                  size={24}
+                  size={28}
                   onClick={() => handleClick(index + 1)}
                   onMouseOver={() => handleMouseOver(index + 1)}
                   onMouseLeave={handleMouseLeave}
