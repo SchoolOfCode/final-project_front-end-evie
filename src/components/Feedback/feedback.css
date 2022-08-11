@@ -1,19 +1,9 @@
-body footer{
-background-color: "#E8F6FF";
-}
-
-h2 {
-color: #0092c5;
-font: sans-serif;
-}
-
 .textarea {
   border: 3px solid #0092c5;
   border-radius: 3px;
   padding-bottom: 30px;
   padding-left: 30px;
   padding-right: 30px;
-  
 }
 
 .button{
