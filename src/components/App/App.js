@@ -237,8 +237,8 @@ function App() {
       <nav
         style={{
           borderBottom: "solid 1px",
-          paddingBottom: "1rem",
-          paddingTop: "1rem",
+          paddingBottom: "0.5rem",
+          paddingTop: "0.5rem",
           backgroundColor: "#E8F6FF",
           textAlign: "center",
         }}

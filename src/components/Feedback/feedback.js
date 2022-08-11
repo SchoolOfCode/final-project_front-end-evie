@@ -66,13 +66,19 @@ function Feedback() {
         className="navigation"
         style={{
           borderBottom: "solid 1px",
-          paddingBottom: "1rem",
-          paddingTop: "1rem",
+          paddingBottom: "0.5rem",
+          paddingTop: "0.5rem",
           backgroundColor: "#E8F6FF",
           textAlign: "center",
         }}
       >
-        <Link to="/">Map</Link> | <Link to="/Feedback">Feedback</Link>
+        <Link className="feedback-link" to="/">
+          Map
+        </Link>{" "}
+        |{" "}
+        <Link className="feedback-link" to="/Feedback">
+          Feedback
+        </Link>
       </nav>
       <form onSubmit={onSubmit} id="submit-form">
         <div style={styles.container}>
