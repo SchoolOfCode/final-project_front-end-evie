@@ -15,7 +15,7 @@ function App() {
   const map = useRef(null);
   const [lng, setLng] = useState(-1.898575);
   const [lat, setLat] = useState(52.489471);
-  const [zoom, setZoom] = useState(13);
+  const [zoom, setZoom] = useState(15);
 
 
   
@@ -76,29 +76,48 @@ console.log(decode(encoded, 5));
         console.log(data2);
         console.log(data2[0].title);
       
-     
-        const matchingItem = [];
+        /*PLAN
+        pull data from open charge api and our backend reviews
+        compare the two and
+        if they have the same title 
+        then we want to display the relevant review on the marker
+        but we also want to display all the markers that don't have reviews
+
+        */
+
+        // const matchingItem = [];
        info.forEach((location) => {
          data2.forEach(review => {
+          //  console.log(`${location.AddressInfo.Title} ${review.title} on line 91`)
         if (location.AddressInfo.Title === review.title) {
-          matchingItem.push(review.review)
+          // console.log('working on 92')
+          // matchingItem.push(review.review)
+           //eslint-disable-next-line
           var marker = new mapboxgl.Marker()
           .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
           .setPopup(new mapboxgl.Popup({ offset: 30 })
-          .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>' + matchingItem[0]))
+          .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>' + review.title + '<h4>' + review.review))
           .addTo(map.current);
-          console.log(matchingItem);
-        }  else {
-          // eslint-disable-next-line
-          var marker = new mapboxgl.Marker()
+          console.log(review.title);
+          console.log(review.review);
+
+
+        } 
+        if  (location.AddressInfo.Title !== review.title)
+          {
+          //eslint-disable-next-line
+          var marker1 = new mapboxgl.Marker()
           .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
           .setPopup(new mapboxgl.Popup({ offset: 30 })
           .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>'))
           .addTo(map.current);
         }   
         })
-        
       })
+        
+
+
+
       return info;
       }
       Fetchpolyline()
@@ -131,9 +150,9 @@ map.current.on('idle', () => {
         console.log('Added directions toggle button');
       }
     }
-    return () => {
-      // Do some cleanup
-     }
+    // return () => {
+    //   // Do some cleanup
+    //  }
   }
 }
 );
@@ -174,7 +193,7 @@ async function Fetch() {
       //popup and markers
       data.forEach((location) => {
         // eslint-disable-next-line
-              var marker = new mapboxgl.Marker()
+              var marker2 = new mapboxgl.Marker()
               .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
                       .setPopup(new mapboxgl.Popup({ offset: 30 })
                       .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
@@ -188,6 +207,9 @@ async function Fetch() {
                   }
                   Fetch()
                 });
+                return () => {
+                  // Do some cleanup
+                 }
               });
 
 //Store new coordinates that you get when a user interacts with the map
