@@ -7,6 +7,11 @@
 .mapboxgl-ctrl-bottom-right {
   display: none;
 }
+
+.feedback-link{
+font-family: sans-serif;
+}
+ 
 /* logo css */
 #logoContainer {
   position: absolute;
@@ -182,7 +187,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(245, 243, 243, 0.1);
 }
 
 .mapboxgl-ctrl-geocoder ul>li:last-child>a {

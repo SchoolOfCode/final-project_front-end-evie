@@ -5,7 +5,7 @@ import "./feedback.css";
 import { FaStar } from "react-icons/fa";
 
 const colors = {
-  orange: "#FFBA5A",
+  cerulean: "#0092c5",
   grey: "#A9A9A9",
 };
 function Feedback() {
@@ -64,28 +64,42 @@ function Feedback() {
   return (
     <>
       <nav
+
         style={{
           borderBottom: "solid 1px",
-          paddingBottom: "1rem",
+          paddingBottom: "0.5rem",
+          paddingTop: "0.5rem",
+          backgroundColor: "#E8F6FF",
+          textAlign: "center",
         }}
       >
-        <Link to="/">Map</Link> | <Link to="/Feedback">Feedback</Link>
+        <Link className="feedback-link" to="/">
+          Map
+        </Link>{" "}
+        |{" "}
+        <Link className="feedback-link" to="/Feedback">
+          Feedback
+        </Link>
       </nav>
       <form onSubmit={onSubmit} id="submit-form">
         <div style={styles.container}>
-          <h2> React Ratings </h2>
+          <h2> Star rate this charge point</h2>
           <div style={styles.stars}>
+            <br />
+
             {stars.map((_, index) => {
               return (
                 <FaStar
                   key={index}
-                  size={24}
+
+                  size={28}
+
                   onClick={() => handleClick(index + 1)}
                   onMouseOver={() => handleMouseOver(index + 1)}
                   onMouseLeave={handleMouseLeave}
                   color={
                     (hoverValue || currentValue) > index
-                      ? colors.orange
+                      ? colors.cerulean
                       : colors.grey
                   }
                   style={{
@@ -96,19 +110,25 @@ function Feedback() {
               );
             })}
           </div>
+          <br />
           Charge point:
-          <textarea placeholder="Charge point" style={styles.textarea} />
+          <textarea placeholder="" className="textarea" />
+          <br />
           Model of charger:
-          <textarea placeholder="Model of charger" style={styles.textarea} />
+          <textarea placeholder="" className="textarea" />
+          <br />
           Socket type:
-          <textarea placeholder="Socket type" style={styles.textarea} />
+          <textarea placeholder="" className="textarea" />
+          <br />
           Leave your review:
-          <textarea placeholder="Review" style={styles.textarea} />
+          <textarea placeholder="" className="textarea" />
+          <br />
           <input
+            className="submit-button"
             id="submit-button"
             type="submit"
             value="Submit Review"
-            style={styles.button}
+
           />
         </div>
       </form>
@@ -119,25 +139,12 @@ const styles = {
   container: {
     display: "flex",
     flexDirection: "column",
+    backgroundColor: "#E8F6FF",
     alignItems: "center",
   },
   stars: {
     display: "flex",
     flexDirection: "row",
-  },
-  textarea: {
-    border: "1px solid #A9A9A9",
-    borderRadius: 5,
-    padding: 10,
-    margin: "20px 0",
-    minHeight: 100,
-    width: 300,
-  },
-  button: {
-    border: "1px solid #A9A9A9",
-    borderRadius: 5,
-    width: 300,
-    padding: 10,
   },
 };
 export default Feedback;
