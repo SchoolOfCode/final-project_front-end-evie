@@ -73,8 +73,8 @@ console.log(decode(encoded, 5));
         const reviews = await fetch(`http://localhost:3001/feedback`);
         const data = await reviews.json();
         const data2 =  data.data;
-        console.log(data2);
-        console.log(data2[0].title);
+         console.log(info);
+        // console.log(data2[0].title);
       
         /*PLAN
         pull data from open charge api and our backend reviews
@@ -88,30 +88,30 @@ console.log(decode(encoded, 5));
         // const matchingItem = [];
        info.forEach((location) => {
          data2.forEach(review => {
-          //  console.log(`${location.AddressInfo.Title} ${review.title} on line 91`)
-        if (location.AddressInfo.Title === review.title) {
+           if (location.AddressInfo.Title === review.title) {
+          console.log(`${location.AddressInfo.Title}`)
           // console.log('working on 92')
           // matchingItem.push(review.review)
            //eslint-disable-next-line
-          var marker = new mapboxgl.Marker()
+          var marker = new mapboxgl.Marker((review.stars === 5 ? {color:"#008000"} : (review.stars===4 ? {color:"#c7ff33"} : (review.stars===3 ? {color:"#ffac33"} : (review.stars===2 ? {color:"#ff6433"} : (review.stars===1 ? {color:"#ff0000"} : {color:"ffffff"}))))))
           .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
           .setPopup(new mapboxgl.Popup({ offset: 30 })
           .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>' + review.title + '<h4>' + review.review))
           .addTo(map.current);
-          console.log(review.title);
-          console.log(review.review);
-
+          // console.log(review.title);
+          // console.log(review.review);
+          console.log(`${location.AddressInfo.Title}`)
 
         } 
-        if  (location.AddressInfo.Title !== review.title)
-          {
-          //eslint-disable-next-line
-          var marker1 = new mapboxgl.Marker()
-          .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
-          .setPopup(new mapboxgl.Popup({ offset: 30 })
-          .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>'))
-          .addTo(map.current);
-        }   
+        // if  (location.AddressInfo.Title !== review.title)
+        //   {
+        //   //eslint-disable-next-line
+        //   var marker1 = new mapboxgl.Marker()
+        //   .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
+        //   .setPopup(new mapboxgl.Popup({ offset: 30 })
+        //   .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>'))
+        //   .addTo(map.current);
+        // }   
         })
       })
         
