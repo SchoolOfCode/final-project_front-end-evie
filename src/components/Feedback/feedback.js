@@ -114,7 +114,7 @@ function Feedback() {
           <textarea placeholder="Leave your review" className="textarea" />
           <br />
           <input
-            className="button"
+            className="submit-button"
             id="submit-button"
             type="submit"
             value="Submit Review"

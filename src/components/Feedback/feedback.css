@@ -15,7 +15,7 @@ h2 {
   padding-right: 30px;
 }
 
-.button{
+.submit-button{
   width: 180px;
   height: 30px;
   border-width: 1px;
@@ -29,7 +29,7 @@ h2 {
   margin-bottom: 225px;
 }
 
-.button:hover {
+.submit-button:hover {
   background: #c1dbeb;
   color: #0092C5;
 }
