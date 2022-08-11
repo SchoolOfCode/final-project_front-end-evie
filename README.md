@@ -43,10 +43,10 @@ npm i
 npm start
 ```
 ### Team Evie members
-[Katie Walters](https://github.com/KatieClarinet)
-[Angela Tsang](https://github.com/soting)
-[Abdul-Aziz Farah](https://github.com/abdul-aziz93)
-[Naeemo Dabharia](https://github.com/NeemoDab)
-[Omar Labban](https://github.com/olabban88)
+- [Katie Walters](https://github.com/KatieClarinet)
+- [Angela Tsang](https://github.com/soting)
+- [Abdul-Aziz Farah](https://github.com/abdul-aziz93)
+- [Naeemo Dabharia](https://github.com/NeemoDab)
+- [Omar Labban](https://github.com/olabban88)
 
 
