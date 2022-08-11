@@ -1,3 +1,5 @@
+![EV-ie logo](https://user-images.githubusercontent.com/74318481/184169309-e7c26419-67d3-48f9-b4c5-9fdccb8e9e6e.jpg)
+
 # EVie
 
 As our final 4 week project team at the School of Code, we decided to build an app for electric vehicle (EV) drivers. 
