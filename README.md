@@ -1,4 +1,4 @@
-![EV-ie logo](https://user-images.githubusercontent.com/74318481/184169309-e7c26419-67d3-48f9-b4c5-9fdccb8e9e6e.jpg = 100x100)
+![EV-ie logo](https://user-images.githubusercontent.com/74318481/184169309-e7c26419-67d3-48f9-b4c5-9fdccb8e9e6e.jpg height="100" width="100")
 
 # EVie
 
