@@ -18,7 +18,9 @@ function App() {
   const [zoom, setZoom] = useState(15);
 
 
-  
+  const star = `
+    <img src="https://res.cloudinary.com/dzwdseno3/image/asset/f_auto/star-bb0cd011d3d4aa12c83109f30c6c17ed.png">
+`;
   
   //'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84'
   useEffect(() => {
@@ -52,7 +54,7 @@ zoom: zoom
        [originCoordsLat,originCoordsLong],
         [destinationCoordsLat,destinationCoordsLong]
        ];
-        console.log(encode(path, 5));
+        // console.log(encode(path, 5));
        result = encode(path, 5);
       // console.log(result);
 
@@ -73,7 +75,7 @@ console.log(decode(encoded, 5));
         const reviews = await fetch(`http://localhost:3001/feedback`);
         const data = await reviews.json();
         const data2 =  data.data;
-         console.log(info);
+        //  console.log(info);
 
         // console.log(data2[0].title);
       
@@ -90,14 +92,14 @@ console.log(decode(encoded, 5));
        info.forEach((location) => {
          data2.forEach(review => {
            if (location.AddressInfo.Title === review.title) {
-          console.log(`${location.AddressInfo.Title}`)
+          // console.log(`${location.AddressInfo.Title}`)
           // console.log('working on 92')
           // matchingItem.push(review.review)
            //eslint-disable-next-line
           var marker = new mapboxgl.Marker((review.stars === 5 ? {color:"#008217"} : (review.stars===4 ? {color:"#5dffa2"} : (review.stars===3 ? {color:"#ffe53e"} : (review.stars===2 ? {color:"#fd4d00"} : (review.stars===1 ? {color:"#e0002b"} : {color:"#0092c5"}))))))
           .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
-          .setPopup(new mapboxgl.Popup({ offset: 30 })
-          .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>' + review.title + '<h4>' + review.review + '<h4>Star Rating:</h4>' + review.stars))
+          .setPopup(new mapboxgl.Popup({ className: "style-popup" })
+          .setHTML(location.AddressInfo.Title + '<br>' + location.AddressInfo.AddressLine1 + '<br>' + location.AddressInfo.Town + '<br>' + location.AddressInfo.Postcode + '<hr>' + review.models + '<br>' + review.socket + `<br><i>"${review.review}"</i><br>` + (review.stars === 5 ? `${star}${star}${star}${star}${star}` : (review.stars === 4 ? `${star}${star}${star}${star}` : (review.stars === 3 ? `${star}${star}${star}` : (review.stars === 2 ? `${star}${star}` : (review.stars === 1 ? `${star}` : "")))))))
           .addTo(map.current);
           // console.log(review.title);
           // console.log(review.review);
@@ -206,8 +208,8 @@ async function Fetch() {
         // eslint-disable-next-line
               var marker2 = new mapboxgl.Marker((review.stars === 5 ? {color:"#008217"} : (review.stars===4 ? {color:"#5dffa2"} : (review.stars===3 ? {color:"#ffe53e"} : (review.stars===2 ? {color:"#fd4d00"} : (review.stars===1 ? {color:"#e0002b"} : {color:"#0092c5"}))))))
               .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
-                      .setPopup(new mapboxgl.Popup({ offset: 30 })
-                      .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>' + review.title + '<h4>' + review.review + '<h4>Star Rating:</h4>' + review.stars))
+                      .setPopup(new mapboxgl.Popup({ className: "style-popup" })
+                      .setHTML(location.AddressInfo.Title + '<br>' + location.AddressInfo.AddressLine1 + '<br>' + location.AddressInfo.Town + '<br>' + location.AddressInfo.Postcode + '<hr>' + review.models + '<br>' + review.socket + `<br><i>"${review.review}"</i><br>` + (review.stars === 5 ? `${star}${star}${star}${star}${star}` : (review.stars === 4 ? `${star}${star}${star}${star}` : (review.stars === 3 ? `${star}${star}${star}` : (review.stars === 2 ? `${star}${star}` : (review.stars === 1 ? `${star}` : "")))))))
                       .addTo(map.current);
                       // console.log(`${location.Connections} line 133`);
                       //  console.log(`${location.Connections[0].ConnectionType.FormalName} line 134`);
