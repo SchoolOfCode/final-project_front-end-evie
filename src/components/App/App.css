@@ -798,4 +798,11 @@ font-family: sans-serif;
   }
 }
 
- 
+/* POPUP STYLING */
+.style-popup .mapboxgl-popup-content {
+  color: #0092c5;
+  background-color: #E8f6ff;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+}

@@ -15,16 +15,14 @@ function App() {
   const map = useRef(null);
   const [lng, setLng] = useState(-1.898575);
   const [lat, setLat] = useState(52.489471);
-  const [zoom, setZoom] = useState(13);
+  const [zoom, setZoom] = useState(15);
 
-  var random;
-  //generate random number
-  var randomNumber = () => {
-    random = Math.floor(Math.random() * 18);
-    return random;
-  };
-  randomNumber();
 
+
+  const star = `
+    <img src="https://res.cloudinary.com/dzwdseno3/image/asset/f_auto/star-bb0cd011d3d4aa12c83109f30c6c17ed.png">
+`;
+  
   //'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84'
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -75,20 +73,61 @@ function App() {
         // waits until the request completes...
         const info = await res.json();
        //popup and markers
-   
-       info.forEach((location) => {
-        // eslint-disable-next-line
-        var marker = new mapboxgl.Marker()
-        .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
-        .setPopup(new mapboxgl.Popup({ offset: 30 })
-        .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
 
-        .addTo(map.current);
+        const reviews = await fetch(`http://localhost:3001/feedback`);
+        const data = await reviews.json();
+        const data2 =  data.data;
+        //  console.log(info);
+
+        // console.log(data2[0].title);
+      
+        /*PLAN
+        pull data from open charge api and our backend reviews
+        compare the two and
+        if they have the same title 
+        then we want to display the relevant review on the marker
+        but we also want to display all the markers that don't have reviews
+
+        */
+
+        // const matchingItem = [];
+       info.forEach((location) => {
+         data2.forEach(review => {
+           if (location.AddressInfo.Title === review.title) {
+          // console.log(`${location.AddressInfo.Title}`)
+          // console.log('working on 92')
+          // matchingItem.push(review.review)
+           //eslint-disable-next-line
+          var marker = new mapboxgl.Marker((review.stars === 5 ? {color:"#008217"} : (review.stars===4 ? {color:"#5dffa2"} : (review.stars===3 ? {color:"#ffe53e"} : (review.stars===2 ? {color:"#fd4d00"} : (review.stars===1 ? {color:"#e0002b"} : {color:"#0092c5"}))))))
+          .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
+          .setPopup(new mapboxgl.Popup({ className: "style-popup" })
+          .setHTML(location.AddressInfo.Title + '<br>' + location.AddressInfo.AddressLine1 + '<br>' + location.AddressInfo.Town + '<br>' + location.AddressInfo.Postcode + '<hr>' + review.models + '<br>' + review.socket + `<br><i>"${review.review}"</i><br>` + (review.stars === 5 ? `${star}${star}${star}${star}${star}` : (review.stars === 4 ? `${star}${star}${star}${star}` : (review.stars === 3 ? `${star}${star}${star}` : (review.stars === 2 ? `${star}${star}` : (review.stars === 1 ? `${star}` : "")))))))
+          .addTo(map.current);
+          // console.log(review.title);
+          // console.log(review.review);
+          console.log(`${location.AddressInfo.Title}`)
+
+        } 
+        // if  (location.AddressInfo.Title !== review.title)
+        //   {
+        //   //eslint-disable-next-line
+        //   var marker1 = new mapboxgl.Marker()
+        //   .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
+        //   .setPopup(new mapboxgl.Popup({ offset: 30 })
+        //   .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode + '<h4>'))
+        //   .addTo(map.current);
+        // }   
+        })
       })
+        
+
+
+
       return info;
       }
-      Fetchpolyline();
+      Fetchpolyline()
     });
+
     // Add geolocate control to the map.
     map.current.addControl(
       new MapboxDirections({
@@ -123,6 +162,7 @@ function App() {
       }
     });
 
+
     const geolocate = new mapboxgl.GeolocateControl({
       positionOptions: {
         enableHighAccuracy: true,
@@ -156,23 +196,37 @@ async function Fetch() {
   const response = await fetch(`https://api.openchargemap.io/v3/poi?compact=true&boundingbox=(${topLeftLat}%2C${topLeftLon})%2C(${bottomRightLat}%2C${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363`);
   // waits until the request completes...
       const data = await response.json();
+
+
+      const allReviewsData = await fetch(`http://localhost:3001/feedback`);
+        const reviewsData = await allReviewsData.json();
+        const reviews =  reviewsData.data;
+         console.log(reviews);
       //popup and markers
       data.forEach((location) => {
+        reviews.forEach(review => {
+          //now only shows nearby markers if they have reviews (to see all just comment out lines 204 and 215)
+          if (location.AddressInfo.Title === review.title) {
+         console.log(`${location.AddressInfo.Title}`)
         // eslint-disable-next-line
-              var marker = new mapboxgl.Marker()
+              var marker2 = new mapboxgl.Marker((review.stars === 5 ? {color:"#008217"} : (review.stars===4 ? {color:"#5dffa2"} : (review.stars===3 ? {color:"#ffe53e"} : (review.stars===2 ? {color:"#fd4d00"} : (review.stars===1 ? {color:"#e0002b"} : {color:"#0092c5"}))))))
               .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
-                      .setPopup(new mapboxgl.Popup({ offset: 30 })
-                      .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode ))
+                      .setPopup(new mapboxgl.Popup({ className: "style-popup" })
+                      .setHTML(location.AddressInfo.Title + '<br>' + location.AddressInfo.AddressLine1 + '<br>' + location.AddressInfo.Town + '<br>' + location.AddressInfo.Postcode + '<hr>' + review.models + '<br>' + review.socket + `<br><i>"${review.review}"</i><br>` + (review.stars === 5 ? `${star}${star}${star}${star}${star}` : (review.stars === 4 ? `${star}${star}${star}${star}` : (review.stars === 3 ? `${star}${star}${star}` : (review.stars === 2 ? `${star}${star}` : (review.stars === 1 ? `${star}` : "")))))))
                       .addTo(map.current);
                       // console.log(`${location.Connections} line 133`);
                       //  console.log(`${location.Connections[0].ConnectionType.FormalName} line 134`);
                       //  console.log(`${location.Connections[0].ConnectionType.Title} line 135` );
-
+          }
                     })
+                  })
                     return data;
                   }
                   Fetch()
                 });
+                return () => {
+                  // Do some cleanup
+                 }
               });
 
 //Store new coordinates that you get when a user interacts with the map
