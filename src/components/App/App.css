@@ -1,6 +1,20 @@
 .App {
   text-align: center;
 }
+/* omars css */
+a:visited { 
+  text-decoration: none; 
+  color: #0092C5; 
+ }
+
+ body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 .mapboxgl-ctrl-logo {
   display: none !important;
 }
