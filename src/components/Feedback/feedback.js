@@ -112,7 +112,6 @@ function Feedback() {
           </div>
           <br />
           Charge point:
-          heloo im working well im trying
           <textarea placeholder="" className="textarea" />
           <br />
           Model of charger:
