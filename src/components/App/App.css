@@ -30,15 +30,15 @@ font-family: sans-serif;
 #logoContainer {
   position: absolute;
   z-index: 100;
-  top: 660px;
-  left: 20px;
+  top: 86vh;
+  left: 1vh;
   opacity: 0.9 ;
-  border-radius: 35px;
+  border-radius: 4vh;
   background-position: left top;
   background-repeat: repeat;
-  padding: 20px;
-  width: 100px;
-  height: 75px;
+  padding: 2.5vh;
+  width: auto;
+  height: 8vh;
   }
 
 .map-container{
