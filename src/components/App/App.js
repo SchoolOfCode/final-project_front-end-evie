@@ -6,7 +6,6 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 // import Feedback from "../Feedback/feedback.js"
 import { encode, decode } from "@googlemaps/polyline-codec";
-
 mapboxgl.accessToken = process.env.REACT_APP_API_KEY;
 
 // test git again 
@@ -42,9 +41,9 @@ function App() {
     let directions = new MapboxDirections({});
     // });
 
-    var result;
-    directions.on("route", (direction) => {
-      var originCoordsLong = directions.getOrigin().geometry.coordinates[0];
+    var result
+    directions.on("route", direction => {
+        var originCoordsLong = directions.getOrigin().geometry.coordinates[0];
       console.log(originCoordsLong);
       var originCoordsLat = directions.getOrigin().geometry.coordinates[1];
       console.log(originCoordsLat);
@@ -75,30 +74,18 @@ function App() {
         );
         // waits until the request completes...
         const info = await res.json();
-        //popup and markers
+       //popup and markers
+   
+       info.forEach((location) => {
+        // eslint-disable-next-line
+        var marker = new mapboxgl.Marker()
+        .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
+        .setPopup(new mapboxgl.Popup({ offset: 30 })
+        .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode))
 
-        info.forEach((location) => {
-          // eslint-disable-next-line
-          var marker = new mapboxgl.Marker()
-            .setLngLat([
-              location.AddressInfo.Longitude,
-              location.AddressInfo.Latitude,
-            ])
-            .setPopup(
-              new mapboxgl.Popup({ offset: 30 }).setHTML(
-                "<h4>" +
-                  location.AddressInfo.Title +
-                  "<h4>" +
-                  location.AddressInfo.AddressLine1 +
-                  "<h4>" +
-                  location.AddressInfo.Town +
-                  "<h4>" +
-                  location.AddressInfo.Postcode
-              )
-            )
-            .addTo(map.current);
-        });
-        return info;
+        .addTo(map.current);
+      })
+      return info;
       }
       Fetchpolyline();
     });
@@ -150,71 +137,60 @@ function App() {
     // Set an event listener that fires
     // when a geolocate event occurs.
 
-    geolocate.on("geolocate", function (ev) {
+    geolocate.on('geolocate', function (ev) {
       var lon = ev.coords.longitude;
       var lat = ev.coords.latitude;
       var position = [lon, lat];
 
-      directions.setOrigin(position);
-
+      directions.setOrigin(position)
+      
       //coordinates for bounding box
       var topLeftLat = lat + 0.051;
       var topLeftLon = lon - 0.079;
       var bottomRightLat = lat - 0.054;
       var bottomRightLon = lon + 0.054;
       //https://api.openchargemap.io/v3/poi?boundingbox=(${topLeftLat}%2C${topLeftLon})%2C(${bottomRightLat}%2C${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363
-      //https://api.openchargemap.io/v3/poi?boundingbox=(${topLeftLat}%2C${topLeftLon})%2C(${bottomRightLat}%2C${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363
-      async function Fetch() {
-        const response = await fetch(
-          `https://api.openchargemap.io/v3/poi?compact=true&boundingbox=(${topLeftLat}%2C${topLeftLon})%2C(${bottomRightLat}%2C${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363`
-        );
-        // waits until the request completes...
-        const data = await response.json();
-        //popup and markers
-        data.forEach((location) => {
-          // eslint-disable-next-line
-          var marker = new mapboxgl.Marker()
-            .setLngLat([
-              location.AddressInfo.Longitude,
-              location.AddressInfo.Latitude,
-            ])
-            .setPopup(
-              new mapboxgl.Popup({ offset: 30 }).setHTML(
-                "<h4>" +
-                  location.AddressInfo.Title +
-                  "<h4>" +
-                  location.AddressInfo.AddressLine1 +
-                  "<h4>" +
-                  location.AddressInfo.Town +
-                  "<h4>" +
-                  location.AddressInfo.Postcode
-              )
-            )
-            .addTo(map.current);
-          // console.log(`${location.Connections} line 133`);
-          //  console.log(`${location.Connections[0].ConnectionType.FormalName} line 134`);
-          //  console.log(`${location.Connections[0].ConnectionType.Title} line 135` );
-        });
-        return data;
-      }
-      Fetch();
-    });
-  });
 
-  //Store new coordinates that you get when a user interacts with the map
-  useEffect(() => {
-    if (!map.current) return; // wait for map to initialize
-    map.current.on("move", () => {
-      setLng(map.current.getCenter().lng.toFixed(4));
-      setLat(map.current.getCenter().lat.toFixed(4));
-      setZoom(map.current.getZoom().toFixed(2));
-    });
-    return () => {
-      // Do some cleanup
-    };
-  });
+async function Fetch() {
+  
+  const response = await fetch(`https://api.openchargemap.io/v3/poi?compact=true&boundingbox=(${topLeftLat}%2C${topLeftLon})%2C(${bottomRightLat}%2C${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363`);
+  // waits until the request completes...
+      const data = await response.json();
+      //popup and markers
+      data.forEach((location) => {
+        // eslint-disable-next-line
+              var marker = new mapboxgl.Marker()
+              .setLngLat([location.AddressInfo.Longitude,location.AddressInfo.Latitude])
+                      .setPopup(new mapboxgl.Popup({ offset: 30 })
+                      .setHTML('<h4>' + location.AddressInfo.Title + '<h4>' + location.AddressInfo.AddressLine1 + '<h4>' + location.AddressInfo.Town + '<h4>' + location.AddressInfo.Postcode ))
+                      .addTo(map.current);
+                      // console.log(`${location.Connections} line 133`);
+                      //  console.log(`${location.Connections[0].ConnectionType.FormalName} line 134`);
+                      //  console.log(`${location.Connections[0].ConnectionType.Title} line 135` );
 
-  //toggle button on turn by turn navigation
+                    })
+                    return data;
+                  }
+                  Fetch()
+                });
+              });
+
+//Store new coordinates that you get when a user interacts with the map
+useEffect(() => {
+if (!map.current) return; // wait for map to initialize
+map.current.on('move', () => {
+setLng(map.current.getCenter().lng.toFixed(4));
+setLat(map.current.getCenter().lat.toFixed(4));
+setZoom(map.current.getZoom().toFixed(2));
+});
+return () => {
+  // Do some cleanup
+ }
+});
+
+
+
+//toggle button on turn by turn navigation
   const toggledirections = (evt) => {
     //console.log("hello")
     let elements = document.getElementsByClassName(
