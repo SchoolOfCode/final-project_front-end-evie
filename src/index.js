@@ -11,7 +11,6 @@ import {
 } from "react-router-dom";
 import Feedback from "./components/Feedback/feedback.js";
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
