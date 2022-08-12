@@ -1,6 +1,20 @@
 .App {
   text-align: center;
 }
+/* omars css */
+a:visited { 
+  text-decoration: none; 
+  color: #0092C5; 
+ }
+
+ body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 .mapboxgl-ctrl-logo {
   display: none !important;
 }
@@ -798,4 +812,11 @@ font-family: sans-serif;
   }
 }
 
- 
+/* POPUP STYLING */
+.style-popup .mapboxgl-popup-content {
+  color: #0092c5;
+  background-color: #E8f6ff;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+}
