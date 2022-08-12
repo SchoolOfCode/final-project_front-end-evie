@@ -1,16 +1,14 @@
-
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import "mapbox-gl/dist/mapbox-gl.css";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
-// import Feedback from "./Feedback/feedback.js"; // eslint-disable-next-line
+// import Feedback from "../Feedback/feedback.js"
 import { encode, decode } from "@googlemaps/polyline-codec";
-
 mapboxgl.accessToken = process.env.REACT_APP_API_KEY;
 
-
+// test git again 
 function App() {
   // const refModal = useRef();
   const mapContainer = useRef(null);
@@ -19,7 +17,7 @@ function App() {
   const [lat, setLat] = useState(52.489471);
   const [zoom, setZoom] = useState(13);
 
-  var random
+  var random;
   //generate random number
   var randomNumber = () => {
     random = Math.floor(Math.random() * 18);
@@ -31,48 +29,49 @@ function App() {
   useEffect(() => {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
-container: mapContainer.current,
-style: 'mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84',
-center: [lng, lat],
-zoom: zoom
-}
-);
+      container: mapContainer.current,
+      style: "mapbox://styles/neemodab/cl6274408001x15pbdsyuyn84",
+      center: [lng, lat],
+      zoom: zoom,
+    });
 
-// let directions
+    // let directions
     //Drop down directions
     // map.current.on('load', function() {
-       let directions = new MapboxDirections({
-      })
+    let directions = new MapboxDirections({});
     // });
 
     var result
     directions.on("route", direction => {
         var originCoordsLong = directions.getOrigin().geometry.coordinates[0];
       console.log(originCoordsLong);
-        var originCoordsLat = directions.getOrigin().geometry.coordinates[1];
+      var originCoordsLat = directions.getOrigin().geometry.coordinates[1];
       console.log(originCoordsLat);
-        var destinationCoordsLong =  directions.getDestination().geometry.coordinates[0];
-      console.log(destinationCoordsLong)
-        var destinationCoordsLat = directions.getDestination().geometry.coordinates[1];
+      var destinationCoordsLong =
+        directions.getDestination().geometry.coordinates[0];
+      console.log(destinationCoordsLong);
+      var destinationCoordsLat =
+        directions.getDestination().geometry.coordinates[1];
       console.log(destinationCoordsLat);
       const path = [
-       [originCoordsLat,originCoordsLong],
-        [destinationCoordsLat,destinationCoordsLong]
-       ];
-        console.log(encode(path, 5));
-       result = encode(path, 5);
+        [originCoordsLat, originCoordsLong],
+        [destinationCoordsLat, destinationCoordsLong],
+      ];
+      console.log(encode(path, 5));
+      result = encode(path, 5);
       console.log(result);
 
       const encoded = "_qs_ItejLzrI{qv@";
-console.log(decode(encoded, 5));
+      console.log(decode(encoded, 5));
 
       // console.log(e);
 
-  // poly line 'https://api.openchargemap.io/v3/poi?polyline=csn_I%7CpqJjsFuxJ&key=267df5b8-6a34-4295-970a-3072b912f363'
+      // poly line 'https://api.openchargemap.io/v3/poi?polyline=csn_I%7CpqJjsFuxJ&key=267df5b8-6a34-4295-970a-3072b912f363'
 
       async function Fetchpolyline() {
-     
-        const res = await fetch(`https://api.openchargemap.io/v3/poi?polyline=${result}&key=267df5b8-6a34-4295-970a-3072b912f363`);
+        const res = await fetch(
+          `https://api.openchargemap.io/v3/poi?polyline=${result}&key=267df5b8-6a34-4295-970a-3072b912f363`
+        );
         // waits until the request completes...
         const info = await res.json();
        //popup and markers
@@ -88,46 +87,43 @@ console.log(decode(encoded, 5));
       })
       return info;
       }
-      Fetchpolyline()
-  
+      Fetchpolyline();
     });
     // Add geolocate control to the map.
-      map.current.addControl(
+    map.current.addControl(
       new MapboxDirections({
         accessToken: mapboxgl.accessToken,
-        controls: {profileSwitcher:false},
-        control:{instruction:true}
+        controls: { profileSwitcher: false },
+        control: { instruction: true },
       }),
-      'top-left'
-      );
+      "top-left"
+    );
 
-
-//toggle button refactor
-map.current.on('idle', () => {
-  addToggleDirectionButton();
-  function addToggleDirectionButton() {
-    let routesummaryelement = document.getElementsByClassName('mapbox-directions-route-summary')[0];
-    if (routesummaryelement) {
-      let button = routesummaryelement.querySelector('.instruction-btn');
-      if (button === null) {
-        const btn = document.createElement("button");
-        btn.className = "instruction-btn";
-        btn.addEventListener("click", toggledirections);
-        btn.innerHTML = "hide directions";
-        routesummaryelement.appendChild(btn);
-        console.log('Added directions toggle button');
+    //toggle button refactor
+    map.current.on("idle", () => {
+      addToggleDirectionButton();
+      function addToggleDirectionButton() {
+        let routesummaryelement = document.getElementsByClassName(
+          "mapbox-directions-route-summary"
+        )[0];
+        if (routesummaryelement) {
+          let button = routesummaryelement.querySelector(".instruction-btn");
+          if (button === null) {
+            const btn = document.createElement("button");
+            btn.className = "instruction-btn";
+            btn.addEventListener("click", toggledirections);
+            btn.innerHTML = "hide directions";
+            routesummaryelement.appendChild(btn);
+            console.log("Added directions toggle button");
+          }
+        }
+        return () => {
+          // Do some cleanup
+        };
       }
-    }
-    return () => {
-      // Do some cleanup
-     }
-  }
-}
-);
+    });
 
-
-
-  const geolocate = new mapboxgl.GeolocateControl({
+    const geolocate = new mapboxgl.GeolocateControl({
       positionOptions: {
         enableHighAccuracy: true,
       },
@@ -149,12 +145,12 @@ map.current.on('idle', () => {
       directions.setOrigin(position)
       
       //coordinates for bounding box
-      var topLeftLat = (lat + 0.051);
-      var topLeftLon = (lon - 0.079);
-      var bottomRightLat = (lat - 0.054);
-      var bottomRightLon = (lon + 0.054);
-//https://api.openchargemap.io/v3/poi?boundingbox=(${topLeftLat}%2C${topLeftLon})%2C(${bottomRightLat}%2C${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363
+      var topLeftLat = lat + 0.051;
+      var topLeftLon = lon - 0.079;
+      var bottomRightLat = lat - 0.054;
+      var bottomRightLon = lon + 0.054;
       //https://api.openchargemap.io/v3/poi?boundingbox=(${topLeftLat}%2C${topLeftLon})%2C(${bottomRightLat}%2C${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363
+
 async function Fetch() {
   
   const response = await fetch(`https://api.openchargemap.io/v3/poi?compact=true&boundingbox=(${topLeftLat}%2C${topLeftLon})%2C(${bottomRightLat}%2C${bottomRightLon})&key=267df5b8-6a34-4295-970a-3072b912f363`);
@@ -214,29 +210,41 @@ return () => {
 
   return (
     <>
-    <nav
+      <nav
         style={{
           borderBottom: "solid 1px",
-          paddingBottom: "1rem",
+          paddingBottom: "0.5rem",
+          paddingTop: "0.5rem",
+          backgroundColor: "#E8F6FF",
+          textAlign: "center",
         }}
       >
-        <Link to="/">Map</Link> |{" "}
-        <Link to="/Feedback">Feedback</Link> 
+        <Link className="feedback-link" to="/">
+          Map
+        </Link>{" "}
+        |{" "}
+        <Link className="feedback-link" to="/Feedback">
+          Feedback
+        </Link>
       </nav>
-  <div>
-    <div className="sidebar">
-      {/*Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}*/}
-    </div>
-    <div ref={mapContainer} className="map-container" />
-  </div>
-  <div>
-  </div>
-   <div id="map" >
-    <div>
-      <img id="logoContainer" src="../blue-logo.png" alt="logo" width="70" />
-    </div>
- </div>
-</>
+      <div>
+        <div className="sidebar">
+          {/*Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}*/}
+        </div>
+        <div ref={mapContainer} className="map-container" />
+      </div>
+      <div></div>
+      <div id="map">
+        <div>
+          <img
+            id="logoContainer"
+            src="../blue-logo.png"
+            alt="logo"
+            width="70"
+          />
+        </div>
+      </div>
+    </>
   );
 }
 

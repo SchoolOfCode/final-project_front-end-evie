@@ -10,6 +10,7 @@ import {
   Route,
 } from "react-router-dom";
 import Feedback from "./components/App/Feedback/feedback.js";
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
