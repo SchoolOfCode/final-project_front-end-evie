@@ -9,7 +9,7 @@ import { encode, decode } from "@googlemaps/polyline-codec";
 
 mapboxgl.accessToken = process.env.REACT_APP_API_KEY;
 
-//testgit
+//test git 
 function App() {
   // const refModal = useRef();
   const mapContainer = useRef(null);
