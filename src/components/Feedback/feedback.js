@@ -73,6 +73,10 @@ function Feedback() {
           textAlign: "center",
         }}
       >
+      <Link className="feedback-link" to="/">
+          Homepage
+        </Link>{" "}
+        |{" "}
         <Link className="feedback-link" to="/maps">
           Map
         </Link>{" "}
