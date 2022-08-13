@@ -1,25 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import './index.css';
-import App from './components/App/App.js';
-import reportWebVitals from './reportWebVitals';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "mapbox-gl/dist/mapbox-gl.css";
+import "./index.css";
+import App from "./components/App/App.js";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Feedback from "./components/Feedback/feedback.js";
+import Homepage from "./components/Homepage/homepage.js";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-  <BrowserRouter>
-  <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="Feedback" element={<Feedback />} />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/maps" element={<App />} />
+        <Route path="Feedback" element={<Feedback />} />
       </Routes>
-  </BrowserRouter>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
