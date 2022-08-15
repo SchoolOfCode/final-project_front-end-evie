@@ -6,7 +6,7 @@ function Homepage() {
     <div>
       <div className="background-image"></div>
       <div className="content-container">
-        <img src="/transparent-bg-logo.png" alt="Evie logo" />
+        <img className="logo-home" src="/transparent-bg-logo.png" alt="Evie logo" />
         <h1 className="homepage-title">Welcome to EVie Chargers</h1>
         <h3 className="intro">
           We provide a smart solution for users in need of eletrical charging

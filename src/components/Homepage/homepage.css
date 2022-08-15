@@ -41,7 +41,7 @@ body {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-img {
+.logo-home{
   position: relative;
   margin-bottom: -4vh;
   box-sizing: border-box;
