@@ -26,7 +26,7 @@ https://ev-ie.netlify.app
 
 - **Client:** 
 ```
-React
+React, Netlify
 ```
 
 - **Server:** 
