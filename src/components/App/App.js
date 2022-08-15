@@ -274,7 +274,7 @@ return () => {
         }}
       >
         <Link className="feedback-link" to="/">
-          Map
+          Homepage
         </Link>{" "}
         |{" "}
         <Link className="feedback-link" to="/Feedback">
