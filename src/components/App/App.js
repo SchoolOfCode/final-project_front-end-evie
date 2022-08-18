@@ -74,7 +74,7 @@ function App() {
         const info = await res.json();
        //popup and markers
 
-        const reviews = await fetch(`http://localhost:5432/feedback`);
+        const reviews = await fetch(`http://localhost:3001/feedback`);
         const data = await reviews.json();
         const data2 =  data.data;
         //  console.log(info);
