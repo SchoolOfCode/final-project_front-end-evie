@@ -15,7 +15,7 @@ function App() {
   const map = useRef(null);
   const [lng, setLng] = useState(-1.898575);
   const [lat, setLat] = useState(52.489471);
-  const [zoom, setZoom] = useState(15);
+  const [zoom, setZoom] = useState(12);
 
 
 
