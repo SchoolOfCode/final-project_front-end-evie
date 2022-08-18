@@ -45,7 +45,7 @@ body {
   position: relative;
   margin-bottom: -4vh;
   box-sizing: border-box;
-  width: 12vw;
+  width: auto;
   height: 14vh;
   min-width: 120px;
   min-height: 100px;
