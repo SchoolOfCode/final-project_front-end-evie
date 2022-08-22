@@ -18,9 +18,9 @@ function Feedback() {
   const handleMouseOver = (newHoverValue) => {
     setHoverValue(newHoverValue);
   };
-  const handleMouseLeave = () => {
-    setHoverValue(undefined);
-  };
+  // const handleMouseLeave = () => {
+  //   setHoverValue(undefined);
+  // };
   const [formValue, setFormValue] = useState({
     title: "",
     models: "",
@@ -31,7 +31,7 @@ function Feedback() {
 
   useEffect(() => {
     axios
-      .post("http://localhost:3001/Feedback", {
+      .post("https://evie-charger.herokuapp.com/feedback", {
         title: formValue.title,
         models: formValue.models,
         socket: formValue.socket,
@@ -87,9 +87,24 @@ function Feedback() {
       </nav>
       <form onSubmit={onSubmit} id="submit-form">
         <div style={styles.container}>
-          <h2> Star rate this charge point</h2>
-          <div style={styles.stars}>
+          <h2>Rate a charge point</h2>
+
+          Charge point:
+          <textarea placeholder="" className="textarea" />
+          <br />
+          Model of charger:
+          <textarea placeholder="" className="textarea" />
+          <br />
+          Socket type:
+          <textarea placeholder="" className="textarea" />
+          <br />
+          Leave your review:
+          <textarea placeholder="" className="textarea" />
+          <br />
+          Star rating:
+          <br />
             <br />
+        <div style={styles.stars}>
 
             {stars.map((_, index) => {
               return (
@@ -100,7 +115,7 @@ function Feedback() {
 
                   onClick={() => handleClick(index + 1)}
                   onMouseOver={() => handleMouseOver(index + 1)}
-                  onMouseLeave={handleMouseLeave}
+                  // onMouseLeave={handleMouseLeave}
                   color={
                     (hoverValue || currentValue) > index
                       ? colors.cerulean
@@ -115,18 +130,6 @@ function Feedback() {
             })}
           </div>
           <br />
-          Charge point:
-          <textarea placeholder="" className="textarea" />
-          <br />
-          Model of charger:
-          <textarea placeholder="" className="textarea" />
-          <br />
-          Socket type:
-          <textarea placeholder="" className="textarea" />
-          <br />
-          Leave your review:
-          <textarea placeholder="" className="textarea" />
-          <br />
           <input
             className="submit-button"
             id="submit-button"
@@ -134,7 +137,7 @@ function Feedback() {
             value="Submit Review"
 
           />
-        </div>
+           </div>
       </form>
     </>
   );
@@ -152,3 +155,4 @@ const styles = {
   },
 };
 export default Feedback;
+
