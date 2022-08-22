@@ -74,7 +74,7 @@ function App() {
         const info = await res.json();
        //popup and markers
 
-        const reviews = await fetch(`http://localhost:3001/feedback`);
+        const reviews = await fetch(`https://evie-charger.herokuapp.com/feedback`);
         const data = await reviews.json();
         const data2 =  data.data;
         //  console.log(info);
@@ -198,7 +198,7 @@ async function Fetch() {
       const data = await response.json();
 
 
-      const allReviewsData = await fetch(`http://localhost:3001/feedback`);
+      const allReviewsData = await fetch(`https://evie-charger.herokuapp.com/feedback`);
         const reviewsData = await allReviewsData.json();
         const reviews =  reviewsData.data;
          console.log(reviews);

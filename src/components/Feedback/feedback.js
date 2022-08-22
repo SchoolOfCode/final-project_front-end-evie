@@ -31,7 +31,7 @@ function Feedback() {
 
   useEffect(() => {
     axios
-      .post("http://localhost:3001/Feedback", {
+      .post("https://evie-charger.herokuapp.com/feedback", {
         title: formValue.title,
         models: formValue.models,
         socket: formValue.socket,
